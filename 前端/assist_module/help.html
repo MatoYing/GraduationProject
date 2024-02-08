@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+                    <!-- <div class="scroll pe-5" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-wrappers="#kt_example_js_content" data-kt-scroll-dependencies="#kt_example_js_header, #kt_example_js_footer, #kt_header" data-kt-scroll-offset="100px">
+                        <div id="kt_example_js_content">
+                            <home_sidebar></home_sidebar>
+                        </div>
+                    </div> -->
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">帮助中心</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="../../demo1/dist/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">帮助中心</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="card mb-12">
+										<div class="card-body p-10 p-lg-15">
+											<div class="mb-13">
+												<div class="mb-15">
+													<h4 class="fs-2x text-gray-800 w-bolder mb-6">记录开发和使用上一些问题与注意点</h4>
+													<p class="fw-semibold fs-4 text-gray-600 mb-2">详细内容可以观看源码</p>
+												</div>
+												<div class="row mb-12">
+													<div class="col-md-6 pe-md-10 mb-10 mb-md-0">
+														<h2 class="text-gray-800 fw-bold mb-4">后端</h2>
+														<div class="m-0">
+															<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1">
+																<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+																	<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />                                                                            
+																		</svg>
+																	</span>
+																	<span class="svg-icon toggle-off svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+																			<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																</div>
+																<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">template引入遇到的问题</h4>
+															</div>
+															<div id="kt_job_4_1" class="collapse fs-6 ms-1">
+																<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">设计到“kt”标签的内容，不知道什么原因，作为template引入时无法使用，只能避开这个内容。主要体现在sidebar的scroller的被选中目录变量无法使用，只能自己进行重写。</div>
+															</div>
+															<div class="separator separator-dashed"></div>
+														</div>
+	
+														<div class="m-0">
+															<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_4">
+																<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+																	<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																	<span class="svg-icon toggle-off svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+																			<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																</div>
+																<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">问题</h4>
+															</div>
+															<div id="kt_job_4_4" class="collapse fs-6 ms-1">
+																<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">问题</div>
+															</div>
+														</div>
+                                                    </div>
+
+													<div class="col-md-6 ps-md-10">
+														<h2 class="text-gray-800 fw-bold mb-4">前端</h2>
+														<div class="m-0">
+															<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_1">
+																<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+																	<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																	<span class="svg-icon toggle-off svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+																			<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																</div>
+																<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">问题</h4>
+															</div>
+															<div id="kt_job_5_1" class="collapse fs-6 ms-1">
+																<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">问题</div>
+															</div>
+															<div class="separator separator-dashed"></div>
+														</div>
+
+														<div class="m-0">
+															<div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_4">
+																<div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+																	<span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																	<span class="svg-icon toggle-off svg-icon-1">
+																		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																			<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+																			<rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+																			<rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+																		</svg>
+																	</span>
+																</div>
+																<h4 class="text-gray-700 fw-bold cursor-pointer mb-0">问题</h4>
+															</div>
+															<div id="kt_job_5_4" class="collapse fs-6 ms-1">
+																<div class="mb-4 text-gray-600 fw-semibold fs-6 ps-10">问题</div>
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script>
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+
+            },
+        	data: {
+            	
+        	},
+			methods: {
+                
+            },
+            mounted() {
+
+            },
+
+
+
+
+   		})
+           
+        
+       
+	</script>
+</html>
+
+
+
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+		<style>
+			.table th {
+				/* 它的CSS有问题，不这样的话，有的点击排序后，呢个箭头会换行 */
+				padding-left: 0;
+			}
+		</style>
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
+                                            报表
+                                        </h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+                                            <li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+                                            <li class="breadcrumb-item text-muted">
+                                                报表
+                                            </li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="card card-flush mb-5">
+
+										<div class="card-header card-header-stretch">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-calendar-week" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">周报</h3>
+											</div>
+										</div>
+
+										<div class="card-body pt-0">
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table">
+												<thead>
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th style="text-align: center;">时间</th>
+														<th style="text-align: center;"></th>
+													</tr>
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+													<tr v-for="name in names">
+														<td style="text-align: center;">
+															<span>{{name.name}}</span>
+														</td>
+														<td style="text-align: center;">
+															<a :href="'http://182.92.232.96:9000/report/' + name.name + '.docx'" class="btn btn-primary btn-sm" >下载</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+                                    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------- -->
+                                    <!-- ---------------------------------------------------------下个表---------------------------------------------------------- -->
+                                    <!-- ----------------------------------------------------------------------------------------------------------------------------------------------- -->
+                                    
+
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+
+			
+
+		</div>
+
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+
+    <script src="/ownJS/report.js"></script>
+	<script>
+        
+        
+        
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+				names: [{
+					name: ""
+				}]
+        	},
+			methods: {
+				getReport() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/report/weekReport",
+            		})
+					.then(resp => {
+						this.names = resp.data.data;
+						console.log(this.names);
+						
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				}
+				
+                
+                
+            },
+            mounted() {
+				this.getReport();
+                
+            },
+			filters:{
+				formatDate: function(value,args) {
+					var dt = new Date(value);
+					if(args == 'yyyy-M-d') {// yyyy-M-d
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${year}-${month}-${date}`;
+					} else if(args == 'yyyy-M-d H:m:s'){// yyyy-M-d H:m:s
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						let hour = dt.getHours();
+						let minute = dt.getMinutes();
+						let second = dt.getSeconds();
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					} else if(args == 'yyyy-MM-dd') {// yyyy-MM-dd
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						return `${year}-${month}-${date}`;
+					} else {// yyyy-MM-dd HH:mm:ss
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						let hour = dt.getHours().toString().padStart(2,'0');
+						let minute = dt.getMinutes().toString().padStart(2,'0');
+						let second = dt.getSeconds().toString().padStart(2,'0');
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					}
+        		}
+			},
+
+   		})
+
+        
+           
+        
+       
+	</script>
+</html>

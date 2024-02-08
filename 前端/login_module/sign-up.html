@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body class="app-blank app-blank">
+		<div class="d-flex flex-column flex-root" id="vue_body">
+			<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+				<div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+					<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+						<div class="w-lg-500px p-10">
+							<form class="form w-100">
+
+								<div class="text-center mb-11">
+									<h1 class="text-dark fw-bolder mb-3">注册</h1>
+								</div>
+
+								<div class="fv-row mb-8">
+									<!-- autocomplete可以关闭浏览器的自动提示 -->
+									<input v-model="user.phone" type="text" placeholder="电话" autocomplete="off" class="form-control bg-transparent"/>
+									<div class="fv-plugins-message-container invalid-feedback">
+										{{error.phone}}
+									</div>
+								</div>
+
+								<div class="row fv-row mb-8">
+									<div class="col-xl-9">
+									  <input v-model="user.captcha" class="form-control bg-transparent" type="text" placeholder="验证码" autocomplete="off"/>
+									</div>
+									<!-- d-grid可以让button符合col-xl-3的大小，而不随着内容而改变 -->
+									<div class="d-grid col-xl-3">
+									  <button @click="sendCaptcha()" type="button" class="btn btn-primary" :disabled="error.captcha3">&nbsp;&nbsp;&nbsp;{{error.captcha2}}&nbsp;&nbsp;&nbsp;</button>
+									</div>
+									<div class="fv-plugins-message-container invalid-feedback">
+										{{error.captcha}}
+									</div>
+								</div>
+
+								<div class="fv-row mb-8" data-kt-password-meter="true">
+									<div class="mb-1">
+										<div class="position-relative mb-3">
+											<input v-model="user.password" class="form-control bg-transparent" type="password" placeholder="密码" autocomplete="off" />
+											<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+												<i class="bi bi-eye-slash fs-2"></i>
+												<i class="bi bi-eye fs-2 d-none"></i>
+											</span>
+										</div>
+										<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+											<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+										</div>
+									</div>
+									<div :style="error.password">
+										请使用8~16个以上的字符，可以包含字母、数字、符号。
+										<!-- #e74c3c #A1A5B7-->
+									</div>
+								</div>
+
+								<div class="fv-row mb-8">
+									<input v-model="user.confirm_password" placeholder="确认密码" type="password" autocomplete="off" class="form-control bg-transparent" />
+									<div class="fv-plugins-message-container invalid-feedback">
+										{{error.confirm_password}}
+									</div>
+								</div>
+
+								<div class="fv-row mb-8">
+									<label class="form-check form-check-inline">
+										<input v-model="user.form_check" class="form-check-input" type="checkbox" value="1"/>
+										<span class="form-check-label fw-semibold fs-base ms-1" :style="error.form_check">
+											我已阅读并同意
+											<a href="#" class="ms-1 link-primary">《注册协议》</a>
+											和
+											<a href="#" class="ms-1 link-primary">《隐私政策》</a>
+										</span>
+									</label>
+								</div>
+
+								<div class="d-grid mb-10">
+									<button @click="register()" type="button" class="btn btn-primary">
+										<span class="indicator-label">注册</span>
+									</button>
+								</div>
+
+								<div class="text-gray-500 text-center fw-semibold fs-6">已有账户？
+									<a href="/login_module/sign-in.html" class="link-primary fw-semibold">登录</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+
+					<login_footer></login_footer>
+
+				</div>
+
+				<login_right></login_right>
+				
+			</div>
+		</div>
+	</body>
+	
+	<script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<!-- <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.10.1/qs.js"></script> -->
+	<script>
+		var vue = new Vue({
+        	el: "#vue_body",
+			components: {
+				// httpVueLoader可以将Vue引入到HTML中
+                "login_footer": httpVueLoader('/plug_in/login_footer.vue'),
+				"login_right": httpVueLoader('/plug_in/login_right.vue')
+            },
+        	data: {
+				// 用户信息
+				user: {
+					phone: "",
+					captcha: "",
+					password: "",
+					confirm_password: "",
+					form_check: false,
+				},
+				// 提交后的各种属性相关处理
+				error: {
+					// 判断电话号码是否正确
+					phone: "",
+					// 判断验证码是否正确
+					captcha: "",
+					// 发送验证码变倒数，之后在变回来
+					captcha2: "发送",
+					// 用来控制发送验证码按钮是否可以点击
+					captcha3: false,
+					// 判断密码是否正确，之后变色
+					password: "color: #A1A5B7",
+					// 判断两次密码是否一致
+					confirm_password: "",
+					// 没点击同意协议变红
+					form_check: "color: #5E6278",
+					// 判断发送验证码后有没有改电话号码
+					phone2: ""
+				}
+        	},
+			methods: {
+				// 获取验证码
+				sendCaptcha() {
+					// 正则表达式判断电话号码是否正确
+					if (!(/^[1][3,4,5,7,8,9][0-9]{9}$/.test(this.user.phone))) { 
+        				alert("手机号码有误，请重填");
+        				this.error.phone = "手机号码有误，请重新输入";
+						return;
+    				} else {
+						this.error.phone = "";
+					}
+					// 使按钮禁止点击
+					this.error.captcha3 = true;
+					// 倒计时60s
+					var timer = 10;
+                    this.error.captcha2 = timer + "s";
+					// 就是附个名字，后面要清除“clearInterval”
+                    this.countDown = setInterval(() => {
+                        --timer;
+                        this.error.captcha2 = timer + "s";
+                        if (timer == 0) {
+                            this.error.captcha3 = false;
+                            this.error.captcha2 = "发送";
+                            clearInterval(this.countDown);
+                        }
+                    }, 1000);
+					// 像后端请求，发送验证码
+					axios({
+                		method: "post",
+                		headers: {
+							// 'Content-Type': 'application/x-www-form-urlencoded'
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/login/getVerificationCode",
+						// 但字符串无法JSON，前端你就得放在一个user里面，后端就得放user里，或放map里
+                		data: JSON.stringify(this.user)
+            		})
+                	.then(resp => {
+						// 待会点提交判断是否改变了号码
+						this.error.phone2 = this.user.phone;
+                    	console.log(resp.data);
+                	})
+                	.catch(err => {
+						this.error.phone2 = this.user.phone;
+                    	console.log(err);
+                	})
+				},
+
+				// 注册
+				register() {
+					// 判断电话号码发送验证码后是否有改变
+					console.log(this.user.phone);
+					console.log(this.error.phone2);
+					if ((this.user.phone != this.error.phone2) || this.user.phone == "") {
+						this.error.phone = "手机号码有误，请重新输入";
+						// console.log(this.user.phone);
+						return;
+					} else {
+						this.error.phone = "";
+					}
+
+					// 是否输入了正确的验证码
+					if (this.user.captcha.length != 4) { 
+						this.error.captcha = "验证码错误，请重新输入";
+						return;
+					} else {
+						this.error.captcha = "";
+					}
+
+					// 正则表达式判断密码是否正确
+					if (this.user.password.length < 6 || this.user.password.length > 16) { 
+						console.log("fdsfds");
+						this.error.password = "color: #e74c3c";
+						return;
+					} else {
+						this.error.password = "color: #A1A5B7";
+					}
+
+					// 正则表达式判断确认密码是否正确
+					if (this.user.password != this.user.confirm_password) { 
+						this.error.confirm_password = "确认密码有误，请重新输入";
+						return;
+					} else {
+						this.error.confirm_password = "";
+					}
+
+					// 正则表达式判断是否勾选协议
+					if(!this.user.form_check){ 
+						this.error.form_check = "color: #e74c3c";
+						return;
+					} else {
+						this.error.form_check = "color: #5E6278";
+					}
+
+					// 向后端请求注册
+					axios({
+						method: "post",
+						headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+						},
+						withCredentials: true,
+						url: "http://127.0.0.1:8088/login/register",
+						data: JSON.stringify(this.user)
+					})
+					.then(resp => {
+						console.log(resp.data);
+						if (resp.data.code == 3) {
+							// 验证码错误
+							this.error.captcha = "验证码错误，请重新输入";
+						} else if (resp.data.code == 0) {
+							this.error.phone = "该手机号码不允许注册";
+						} else {
+							// 成功
+							window.location.href = "/index.html"
+						}
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+
+				},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            },
+   		})
+	</script>
+</html>

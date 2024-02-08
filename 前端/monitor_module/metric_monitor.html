@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+		<style>
+			.table th {
+				/* 它的CSS有问题，不这样的话，有的点击排序后，呢个箭头会换行 */
+				padding-left: 0;
+			}
+			/* div.dataTables_wrapper .table-responsive {
+    			
+			} */
+		</style>
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">指标监控</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">指标监控</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="card card-flush">
+										<!--begin::Card header-->
+										<div class="card-header align-items-center py-5 gap-2 gap-md-5">
+											<!--begin::Card title-->
+											<div class="card-title">
+												<!--begin::Search-->
+												<div class="d-flex align-items-center position-relative my-1">
+													<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+													<span class="svg-icon svg-icon-1 position-absolute ms-4">
+														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="currentColor" />
+															<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
+														</svg>
+													</span>
+													<!--end::Svg Icon-->
+													<input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="搜索" />
+												</div>
+												<!--end::Search-->
+												<!--begin::Export buttons-->
+												<div id="kt_ecommerce_report_views_export" class="d-none"></div>
+												<!--end::Export buttons-->
+											</div>
+											<!--end::Card title-->
+											<!--begin::Card toolbar-->
+											<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+												<!--begin::Daterangepicker-->
+												<!-- <input class="form-control form-control-solid w-100 mw-250px" placeholder="Pick date range" id="kt_ecommerce_report_views_daterangepicker" /> -->
+												<!--end::Daterangepicker-->
+												<!--begin::Filter-->
+												<div class="w-150px">
+													<!--begin::Select2-->
+													<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="状态" data-kt-ecommerce-order-filter="status">
+														<option></option>
+														<option value="all">所有</option>
+														<option value="运行">运行</option>
+														<option value="故障">故障</option>
+														<option value="关闭">关闭</option>
+													</select>
+													<!--end::Select2-->
+												</div>
+												<button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+													<span class="svg-icon svg-icon-2">
+														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect opacity="0.3" x="12.75" y="4.25" width="12" height="2" rx="1" transform="rotate(90 12.75 4.25)" fill="currentColor" />
+															<path d="M12.0573 6.11875L13.5203 7.87435C13.9121 8.34457 14.6232 8.37683 15.056 7.94401C15.4457 7.5543 15.4641 6.92836 15.0979 6.51643L12.4974 3.59084C12.0996 3.14332 11.4004 3.14332 11.0026 3.59084L8.40206 6.51643C8.0359 6.92836 8.0543 7.5543 8.44401 7.94401C8.87683 8.37683 9.58785 8.34458 9.9797 7.87435L11.4427 6.11875C11.6026 5.92684 11.8974 5.92684 12.0573 6.11875Z" fill="currentColor" />
+															<path opacity="0.3" d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="currentColor" />
+														</svg>
+													</span>
+													导出报表
+												</button>
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">添加对象</button>
+												<div id="kt_ecommerce_report_views_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="excel">导出为Excel</a>
+													</div>
+													<!-- <div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="pdf">导出为PDF</a>
+													</div> -->
+												</div>
+											</div>
+											<!--end::Card toolbar-->
+										</div>
+										<!--end::Card header-->
+										<!--begin::Card body-->
+										<div class="card-body pt-0">
+											<!--begin::Table-->
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table" style="z-index: 999;">
+												<!--begin::Table hea-->
+												<thead>
+													<!--begin::Table row-->
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th  style="text-align: center;">名称</th>
+														<th  style="text-align: center;">服务器地址</th>
+														<th  style="text-align: center;">添加人</th>
+														<th  style="text-align: center;">添加日期</th>
+														<th  style="text-align: center;">状态</th>
+														<th  style="text-align: center;">监控规则</th>
+														<th  style="text-align: center;">普通报警</th>
+														<th  style="text-align: center;">重要报警</th>
+														<th  style="text-align: center;">紧急报警</th>
+														<th  style="text-align: center;"></th>
+													</tr>
+													<!--end::Table row-->
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+													<tr v-for="monitor in monitors">
+														<td  style="text-align: center;">
+															<span>{{monitor.name}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.server_address}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.people}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.date|formatDate('yyyy-M-d')}}</span>
+														</td>
+														<td  style="text-align: center;"  data-filter="open">
+															<div v-if="monitor.status == '关闭'" class="badge badge-light-danger">关闭</div>
+															<div v-if="monitor.status == '运行'" class="badge badge-light-success">运行</div>
+															<div v-if="monitor.status == '故障'" class="badge badge-light-warning">故障</div>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.rules}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.warnings + 1}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.critical}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<span>{{monitor.emergency}}</span>
+														</td>
+														<td style="text-align: center;">
+															<!-- <a :href="monitor.grafana" class="btn btn-light-primary btn-sm">图表展示</a> -->
+															<a @click="jumpGraph(monitor.grafana)" class="btn btn-light-primary btn-sm">图表展示</a>
+
+															<a @click="jumpAlert(monitor.name)" class="btn btn-light-primary btn-sm">报警内容</a>
+															<a class="btn btn-sm btn-light btn-active-light-primary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+																其他<span class="svg-icon svg-icon-5 m-0">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor" />	</svg></span>
+															</a>
+															<div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" style="z-index: 9999999!important; position: fixed;">
+															  	<div class="menu-item px-3">
+																	<a class="menu-link px-3" href="#" @click="getAdditional(monitor.file_address, monitor.note)" class="menu-link px-3" data-bs-toggle="modal" data-bs-target="#remaining_content">
+																		剩余内容
+																	</a>
+																</div>
+																<div class="menu-item px-3">
+																	<a class="menu-link px-3" href="#" @click="getEdit(monitor.name, monitor.server_address, monitor.file_address, monitor.grafana, monitor.note, monitor.status)" data-bs-toggle="modal" data-bs-target="#edit">
+																		编辑
+																	</a>
+																</div>
+															</div>
+															
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<!-- ----------------------------------------------------------------------- -->
+			<!-- ----------------------------------------------------------------------- -->
+			<!-- ----------------------------------------------------------------------- -->
+
+
+
+
+			<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">添加监控对象</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">名称</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.name"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">服务器地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.server_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Rule文件地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.file_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Grafana地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.grafana"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">备注</label>
+										<textarea class="form-control form-control-solid" rows="3" v-model="newMonitor.note"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="addMonitor()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	
+	
+			<div class="modal fade" id="remaining_content" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">其他内容</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" /><rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" /></svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Rule文件地址</label>
+										<input type="text" class="form-control form-control-solid" disabled :value="additional.file_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">备注</label>
+										<textarea class="form-control form-control-solid" rows="3" readonly>{{additional.note}}</textarea>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	
+			<div class="modal fade" id="edit" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">编辑内容</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">名称</label>
+										<input type="text" class="form-control form-control-solid" v-model="additional.name"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">状态</label>
+										<div class="d-flex flex-wrap align-items-center text-gray-600 gap-5 mb-7">
+											<div class="form-check form-check-custom form-check-solid">
+												<input v-model="additional.status" class="form-check-input" type="radio" name="conditions" value="运行" id="one" :checked="additional.status == '运行'" />
+												<label class="form-check-label" for="one">运行</label>
+											</div>
+											<div class="form-check form-check-custom form-check-solid">
+												<input v-model="additional.status" class="form-check-input" type="radio" name="conditions" value="关闭" id="two" :checked="additional.status == '关闭'"/>
+												<label class="form-check-label" for="two">关闭</label>
+											</div>
+											<div class="form-check form-check-custom form-check-solid">
+												<input v-model="additional.status" class="form-check-input" type="radio" name="conditions" value="故障" id="three" :checked="additional.status == '故障'"/>
+												<label class="form-check-label" for="three">故障</label>
+											</div>
+										</div>
+									</div>
+															
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">服务器地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="additional.server_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Rule文件地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="additional.file_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Grafana地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="additional.grafana"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">备注</label>
+										<textarea v-model="additional.note" class="form-control form-control-solid" rows="3"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="editMonitor()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+
+	<script src="/ownJS/views.js"></script>
+	<script>
+		
+    
+        
+        
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+				// v-mode实现了视图和data中数据的双向绑定，两者其一改变均改变
+				// v-bind:value只是将初始化时data中的数据绑定到input上，修改input中的值并不会改变data中的数据。
+				monitors: [{
+                    name: "",
+                    server_address: "",
+					file_address: "",
+                    people: "",
+                    date: "",
+                    status: "",
+                    rules: "", // 数量
+                    warnings: "",
+                    critial: "",
+                    emergency: "",
+                    note: "",
+                    grafana:"",
+                    type: ""
+				}],
+				// monitors: [{
+                //     name: "21",
+                //     server_address: "21",
+				// 	file_address: "21",
+                //     people: "21",
+                //     date: "21",
+                //     status: "21",
+                //     rules: "21", // 数量
+                //     warnings: "21",
+                //     critial: "21",
+                //     emergency: "21",
+                //     note: "21",
+                //     grafana:"21",
+                //     type: "21"
+				// },
+				// {
+                //     name: "321",
+                //     server_address: "21",
+				// 	file_address: "21",
+                //     people: "21",
+                //     date: "21",
+                //     status: "21",
+                //     rules: "21", // 数量
+                //     warnings: "21",
+                //     critial: "21",
+                //     emergency: "21",
+                //     note: "21",
+                //     grafana:"21",
+                //     type: "21"
+				// }],
+				additional: {
+					name: "",
+                    server_address: "",
+					file_address: "",
+                    people: "",
+                    date: "",
+                    status: "",
+                    rules: "", 
+                    warnings: "",
+                    critial: "",
+                    emergency: "",
+                    note: "",
+                    grafana:"",
+                    type: "",
+					name2: "",
+				},
+				newMonitor: {
+					name: "",
+                    server_address: "",
+					file_address: "",
+                    people: "",
+                    date: "",
+                    status: "",
+                    rules: "", 
+                    warnings: "",
+                    critial: "",
+                    emergency: "",
+                    note: "",
+                    grafana:"",
+                    type: "",
+					name2: "",
+				}
+            },
+			methods: {
+				getMonitor() {
+					// 获取所有监控目标
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/monitor/getMonitor",
+            		})
+					.then(resp => {
+						console.log(resp.data);
+						for (monitor in resp.data.data) {
+							this.monitors.push(resp.data.data[monitor]);
+						}
+						this.monitors = resp.data.data;
+						console.log(this.monitors);
+						console.log("dasda");
+						// resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+
+				editMonitor() {
+					// 编辑监控目标
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/monitor/updateMonitor",
+						data: JSON.stringify(this.additional)
+            		})
+					.then(resp => {
+						console.log(resp.data);
+						// 必须写里面，它这里的JS并不是按顺序执行的，很可能先执行下面的在执行Axios
+						this.getMonitor();
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				addMonitor() {
+					// 添加监控目标
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/monitor/addMonitor",
+						data: JSON.stringify(this.newMonitor)
+            		})
+					.then(resp => {
+						console.log(resp.data);
+						this.getMonitor();
+						for (var key in this.newMonitor) {
+							this.newMonitor[key] = "";
+						}
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				jumpGraph(grafana) {
+					// 跳转到图表页面
+					localStorage.setItem("grafana", grafana);
+					window.location.href = "/additional_module/metric_graph.html";
+				},
+
+				jumpAlert(name) {
+					// 跳转到告警页面
+					localStorage.setItem("name", name);
+					window.location.href = "/additional_module/metric_alert.html";
+				},
+
+				getAdditional(file_address, note) {
+					// 获取“剩余内容”信息
+					this.additional.file_address = file_address;
+					this.additional.note = note;
+				},
+
+				getEdit(name, server_address, file_address, grafana, note, status) {
+					// 获取“编辑”信息
+					this.additional.name = name;
+					this.additional.server_address = server_address;
+					this.additional.file_address = file_address;
+					this.additional.grafana = grafana;
+					this.additional.note = note;
+					this.additional.status = status;
+					this.additional.name2 = name;
+				},
+
+                
+            },
+            mounted() {
+                this.getMonitor();
+            },
+			
+
+			filters:{
+				formatDate: function(value,args) {
+					var dt = new Date(value);
+					if(args == 'yyyy-M-d') {// yyyy-M-d
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${year}-${month}-${date}`;
+					} else if(args == 'yyyy-M-d H:m:s'){// yyyy-M-d H:m:s
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						let hour = dt.getHours();
+						let minute = dt.getMinutes();
+						let second = dt.getSeconds();
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					} else if(args == 'yyyy-MM-dd') {// yyyy-MM-dd
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						return `${year}-${month}-${date}`;
+					} else {// yyyy-MM-dd HH:mm:ss
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						let hour = dt.getHours().toString().padStart(2,'0');
+						let minute = dt.getMinutes().toString().padStart(2,'0');
+						let second = dt.getSeconds().toString().padStart(2,'0');
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					}
+        		}
+			},
+			
+
+   		})
+
+        
+
+
+
+
+
+           
+setTimeout(function (){
+ 
+	KTUtil.onDOMContentLoaded((function() {
+	console.log("views.js");
+	KTAppEcommerceReportViews.init()
+}));
+}, 3000);
+
+
+        
+       
+	</script>
+</html>
+
+
+
+

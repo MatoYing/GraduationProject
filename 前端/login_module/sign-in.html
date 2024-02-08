@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<!-- 可能没用 -->
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+
+	<body id="" class="app-blank app-blank">
+		<div class="d-flex flex-column flex-root" id="vue_body">
+			<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+				<div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+					<div class="d-flex flex-center flex-column flex-lg-row-fluid">
+						<div class="w-lg-500px p-10">
+							<form class="form w-100" action="#">
+								<div class="text-center mb-5">
+									<h1 class="text-dark fw-bolder mb-3">登录</h1>
+								</div>
+
+								<div class="fv-row mb-5">
+									<div class="bg-light-info p-8 rounded">
+										<div class="text-info">
+										  使用电话 <strong>88888888</strong> 和密码 <strong>88888888</strong> 登入管理员账户。
+										</div>
+									</div>
+								</div>
+
+								<div class="row g-3 mb-9">
+									<div class="col-md-6">
+										<a @click="loginByQQ()" href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
+											<img alt="Logo" src="/assets/media/svg/brand-logos/qq.svg" class="h-20px me-3" />
+											QQ登录
+										</a>
+									</div>
+									<div class="col-md-6">
+										<a @click="loginByDingDing()" href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
+											<img alt="Logo" src="/assets/media/svg/brand-logos/dingding.svg" class="theme-light-show h-20px me-3" />
+											钉钉登录
+										</a>
+									</div>
+								</div>
+
+
+								<div class="separator separator-content my-10">
+									<span class="w-125px text-gray-500 fw-semibold fs-7">使用账号登录</span>
+								</div>
+
+
+								<div class="fv-row mb-8">
+									<input v-model="user.phone" type="text" placeholder="电话" autocomplete="off" class="form-control bg-transparent" />
+									<div class="fv-plugins-message-container invalid-feedback">
+										{{error.phone}}
+									</div>
+								</div>
+
+
+								<div class="fv-row mb-3">
+									<input v-model="user.password" type="password" placeholder="密码" autocomplete="off" class="form-control bg-transparent" />
+									<div class="fv-plugins-message-container invalid-feedback">
+										{{error.password}}
+									</div>
+								</div>
+								
+								<div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+									<!-- 加个这个就能把下面的字段挤到右边 -->
+									<div></div>
+									<!-- reCAPTCHA -->
+									<!-- <div class="g-recaptcha" data-sitekey="6LdS7HAkAAAAAICoUv7qtPTGyMt477Zh-1D5qnYR"></div> -->
+									<a href="/login_module/new-password.html" class="link-primary">忘记密码？</a>
+								</div>
+
+
+
+
+								<div class="d-grid mb-10">
+									<!-- button的type注意，如果是submit，点击后会出发url的提交方式 -->
+									<button type="button" id="kt_sign_in_submit" class="btn btn-primary" @click="login()">
+										<span class="indicator-label">登入</span>
+										<span class="indicator-progress">
+											请等待...
+											<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+										</span>
+									</button>
+								</div>
+
+								<div class="text-gray-500 text-center fw-semibold fs-6">没有账号？
+									<a href="/login_module/sign-up.html" class="link-primary">创建账户</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+
+					<login_footer></login_footer>
+
+				</div>
+
+				<login_right></login_right>
+
+			</div>
+		</div>
+	</body>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<!-- unpkg is a fast, global content delivery network for everything on npm. Use it to quickly -->
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		// 失效的话很可能是CDN的原因
+		var vue = new Vue({
+        	el: "#vue_body",
+			components: {
+				// httpVueLoader可以将Vue引入到HTML中
+                "login_footer": httpVueLoader('/plug_in/login_footer.vue'),
+				"login_right": httpVueLoader('/plug_in/login_right.vue')
+            },
+        	data: {
+				user: {
+					phone: "",
+					password: "",
+				},
+				error: {
+					phone: "",
+					password: ""
+				}
+        	},
+			methods: {
+                login() {
+					// 如果是管理员
+					if (this.user.phone == "88888888" && this.user.password == "88888888") {
+						window.location.href = "/administer/people.html"
+					}
+
+					// 验证手机号码
+					if (!(/^[1][3,4,5,7,8,9][0-9]{9}$/.test(this.user.phone))) { 
+        				this.error.phone = "手机号码有误，请重新输入";
+						return;
+    				} else {
+						this.error.phone = "";
+					}
+
+					// 验证密码
+					if (this.user.password.length < 8 || this.user.password.length > 16) { 
+						this.error.password = "密码有误，请重新输入";
+						return;
+					} else {
+						this.error.password = "";
+					}
+
+					// 发送登录请求
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/login/login",
+                		data: JSON.stringify(this.user)
+            		})
+					.then(resp => {
+						console.log(resp.data);
+						if (resp.data.code == 1) {
+							// 不存在该用户
+							this.error.phone = "手机号码有误，请重新输入";
+						} else if (resp.data.code == 2) {
+							// 密码错误
+							this.error.password = "密码错误，请重新输入";
+						} else {
+							// 成功
+							if (this.user.phone == "13333461340") {
+								localStorage.setItem("nameForUser", "张三");
+							} else {
+								localStorage.setItem("nameForUser", "李四");
+							}
+							window.location.href = "/index.html"
+						}
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+
+                },
+
+				loginByQQ() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/login//loginByQQ",
+            		})
+					.then(resp => {
+						// console.log(resp.data);
+						if (this.user.phone == "13333461340") {
+							localStorage.setItem("nameForUser", "张三");
+						} else {
+							localStorage.setItem("nameForUser", "李四");
+						}
+						window.location.href = resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+
+				},
+
+				loginByDingDing() {
+					if (this.user.phone == "13333461340") {
+						localStorage.setItem("nameForUser", "张三");
+					} else {
+						localStorage.setItem("nameForUser", "李四");
+					}
+					window.location.href = "https://login.dingtalk.com/oauth2/challenge.htm?redirect_uri=http://127.0.0.1:8088/login/callback2&response_type=code&client_id=ding91tq9woqjqwy8d3i&scope=openid&prompt=consent";
+				}
+
+
+				
+            },
+   		})
+	</script>
+</html>

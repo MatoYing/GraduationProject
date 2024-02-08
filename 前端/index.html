@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">监控概况</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">监控概况</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<!-- ------------------------------------------------------------------------------------------- -->
+                                    <div class="row g-5 g-xl-10">
+										<div class="col-xl-3">
+											<a href="#" class="card bg-body hoverable card-xl-stretch mb-xl-8">
+												<div class="card-body">
+													<span class="svg-icon svg-icon-primary svg-icon-3x ms-n1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">	<rect x="8" y="9" width="3" height="10" rx="1.5" fill="currentColor" />	<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="currentColor" />	<rect x="18" y="11" width="3" height="8" rx="1.5" fill="currentColor" />	<rect x="3" y="13" width="3" height="6" rx="1.5" fill="currentColor" /></svg></span>
+													<div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">{{data1}}个</div>
+													<div class="fw-semibold text-gray-400">已完成巡检数</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-xl-3">
+											<a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
+												<div class="card-body">
+													<span class="svg-icon svg-icon-gray-100 svg-icon-3x ms-n1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">	<path opacity="0.3" d="M10.9607 12.9128H18.8607C19.4607 12.9128 19.9607 13.4128 19.8607 14.0128C19.2607 19.0128 14.4607 22.7128 9.26068 21.7128C5.66068 21.0128 2.86071 18.2128 2.16071 14.6128C1.16071 9.31284 4.96069 4.61281 9.86069 4.01281C10.4607 3.91281 10.9607 4.41281 10.9607 5.01281V12.9128Z" fill="currentColor" />	<path d="M12.9607 10.9128V3.01281C12.9607 2.41281 13.4607 1.91281 14.0607 2.01281C16.0607 2.21281 17.8607 3.11284 19.2607 4.61284C20.6607 6.01284 21.5607 7.91285 21.8607 9.81285C21.9607 10.4129 21.4607 10.9128 20.8607 10.9128H12.9607Z" fill="currentColor" /></svg></span>
+													<div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">{{data2}}个</div>
+													<div class="fw-semibold text-gray-100">普通告警数</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-xl-3">
+											<a href="#" class="card bg-warning hoverable card-xl-stretch mb-xl-8">
+												<div class="card-body">
+													<span class="svg-icon svg-icon-white svg-icon-3x ms-n1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">	<path opacity="0.3" d="M10.9607 12.9128H18.8607C19.4607 12.9128 19.9607 13.4128 19.8607 14.0128C19.2607 19.0128 14.4607 22.7128 9.26068 21.7128C5.66068 21.0128 2.86071 18.2128 2.16071 14.6128C1.16071 9.31284 4.96069 4.61281 9.86069 4.01281C10.4607 3.91281 10.9607 4.41281 10.9607 5.01281V12.9128Z" fill="currentColor" />	<path d="M12.9607 10.9128V3.01281C12.9607 2.41281 13.4607 1.91281 14.0607 2.01281C16.0607 2.21281 17.8607 3.11284 19.2607 4.61284C20.6607 6.01284 21.5607 7.91285 21.8607 9.81285C21.9607 10.4129 21.4607 10.9128 20.8607 10.9128H12.9607Z" fill="currentColor" /></svg></span>
+													<div class="text-white fw-bold fs-2 mb-2 mt-5">{{data3}}个</div>
+													<div class="fw-semibold text-white">中级告警数</div>
+												</div>
+											</a>
+										</div>
+										<div class="col-xl-3">
+											<a href="#" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
+												<div class="card-body">
+													<span class="svg-icon svg-icon-white svg-icon-3x ms-n1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">	<path opacity="0.3" d="M10.9607 12.9128H18.8607C19.4607 12.9128 19.9607 13.4128 19.8607 14.0128C19.2607 19.0128 14.4607 22.7128 9.26068 21.7128C5.66068 21.0128 2.86071 18.2128 2.16071 14.6128C1.16071 9.31284 4.96069 4.61281 9.86069 4.01281C10.4607 3.91281 10.9607 4.41281 10.9607 5.01281V12.9128Z" fill="currentColor" />	<path d="M12.9607 10.9128V3.01281C12.9607 2.41281 13.4607 1.91281 14.0607 2.01281C16.0607 2.21281 17.8607 3.11284 19.2607 4.61284C20.6607 6.01284 21.5607 7.91285 21.8607 9.81285C21.9607 10.4129 21.4607 10.9128 20.8607 10.9128H12.9607Z" fill="currentColor" /></svg></span>
+													<div class="text-white fw-bold fs-2 mb-2 mt-5">{{data4}}个</div>
+													<div class="fw-semibold text-white">高级告警数</div>
+												</div>
+											</a>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="row g-5 g-xl-10">
+										<div class="col-xl-4">
+											<div class="card bg-light-success card-xl-stretch mb-xl-8">
+												<div class="card-body my-3">
+													<a href="#" class="card-title fw-bold text-success fs-5 mb-3 d-block">普通告警数</a>
+													<div class="py-1">
+														<span class="text-dark fs-1 fw-bold me-2">{{((data2 - data5) / data2) * 100}}%</span>
+														<span class="fw-semibold text-muted fs-7">{{data5}}条未处理</span>
+													</div>
+													<div class="progress h-7px bg-success bg-opacity-50 mt-7">
+														<div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-4">
+											<div class="card bg-light-warning card-xl-stretch mb-xl-8">
+												<div class="card-body my-3">
+													<a href="#" class="card-title fw-bold text-warning fs-5 mb-3 d-block">中级告警数</a>
+													<div class="py-1">
+														<span class="text-dark fs-1 fw-bold me-2">{{((data3 - data6) / data3) * 100}}%</span>
+														<a href="/people.html">{{data6}}条未处理</a>
+													</div>
+													<div class="progress h-7px bg-warning bg-opacity-50 mt-7">
+														<div class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-4">
+											<div class="card bg-light-primary card-xl-stretch mb-5 mb-xl-8">
+												<div class="card-body my-3">
+													<a href="#" class="card-title fw-bold text-primary fs-5 mb-3 d-block">高级告警数</a>
+													<div class="py-1">
+														<span class="text-dark fs-1 fw-bold me-2">{{((data4 - data7) / data4) * 100}}%</span>
+														<span class="fw-semibold text-muted fs-7">{{data7}}条未处理</span>
+													</div>
+													<div class="progress h-7px bg-primary bg-opacity-50 mt-7">
+														<div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <div class="row g-5 g-xl-10">
+										<div class="col-xl-6">
+											<div class="card card-bordered">
+												<div class="card-body">
+													<div id="kt_amcharts_3" style="height: 500px;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="col-xl-6">
+											<div class="card mb-5 mb-xxl-8">
+												<div class="card-header align-items-center border-0 mt-4">
+													<h3 class="card-title align-items-start flex-column">
+														<span class="fw-bold mb-2 text-dark">知识库</span>
+														<span class="text-muted fw-semibold fs-7">{{knowledges.length}} 条</span>
+													</h3>
+												</div>
+												<div class="card-body ">
+													<div class="timeline-label">
+														<div class="timeline-item" v-for="knowledge in knowledges.slice(0, 10)">
+															<div class="timeline-label fw-bold text-gray-800 fs-6">{{knowledge.date |formatDate('MM-dd')}}</div>
+															<div class="timeline-badge">
+																<i class="fa fa-genderless text-warning fs-1"></i>
+															</div>
+															<div class="timeline-content d-flex">
+																<span class="fw-bold text-gray-800 ps-3">{{knowledge.name}}：{{knowledge.content}}</span>
+															</div>
+														</div>
+														<!-- <div class="timeline-item">
+															<div class="timeline-label fw-bold text-gray-800 fs-6">08:42</div>
+															<div class="timeline-badge">
+																<i class="fa fa-genderless text-success fs-1"></i>
+															</div>
+															<div class="timeline-content d-flex">
+																<span class="fw-bold text-gray-800 ps-3">AEOL meeting</span>
+															</div>
+														</div>
+														<div class="timeline-item">
+															<div class="timeline-label fw-bold text-gray-800 fs-6">08:42</div>
+															<div class="timeline-badge">
+																<i class="fa fa-genderless text-danger fs-1"></i>
+															</div>
+															<div class="timeline-content d-flex">
+																<span class="fw-bold text-gray-800 ps-3">AEOL meeting</span>
+															</div>
+														</div> -->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+
+								</div>
+							</div>
+						</div>
+						<!-- 在上面最后一个模块地div加个mb，否则会和footer重合 -->
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script>
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+            },
+        	data: {
+            	data1: "",
+				data2: "",
+				data3: "",
+				data4: "",
+				data5: "",
+				data6: "",
+				data7: "",
+				data8: "",
+				data9: "",
+				data10: "",
+				knowledges: [{
+						name: "ds",
+						content: "ds",
+						date: "ds",
+						address: "ds",
+						people: "ds",
+					},
+				],
+        	},
+			methods: {
+				amcharts3_initialize() {
+					var root = am5.Root.new("kt_amcharts_3");
+					// Set themes
+					// https://www.amcharts.com/docs/v5/concepts/themes/
+					root.setThemes([
+						am5themes_Animated.new(root)
+					]);
+					// Create chart
+					// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
+					var chart = root.container.children.push(am5percent.PieChart.new(root, {
+						layout: root.verticalLayout
+					}));
+					// Create series
+					// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
+					var series = chart.series.push(am5percent.PieSeries.new(root, {
+						alignLabels: true,
+						calculateAggregates: true,
+						valueField: "value",
+						categoryField: "category"
+					}));
+					series.slices.template.setAll({
+						strokeWidth: 3,
+						stroke: am5.color(0xffffff)
+					});
+					series.labelsContainer.set("paddingTop", 30)
+					// Set up adapters for variable slice radius
+					// https://www.amcharts.com/docs/v5/concepts/settings/adapters/
+					series.slices.template.adapters.add("radius", function (radius, target) {
+						var dataItem = target.dataItem;
+						var high = series.getPrivate("valueHigh");
+						if (dataItem) {
+							var value = target.dataItem.get("valueWorking", 0);
+							return radius * value / high
+						}
+						return radius;
+					});
+					// Set data
+					// https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
+					series.data.setAll([
+						{
+							value: this.data9,
+							category: "指标"
+						}, 
+						{
+							value: this.data10,
+							category: "日志"
+						}
+					])
+
+					// Create legend
+					// https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
+					var legend = chart.children.push(am5.Legend.new(root, {
+						centerX: am5.p50,
+						x: am5.p50,
+						marginTop: 15,
+						marginBottom: 15
+					}));
+					legend.data.setAll(series.dataItems);
+					// Play initial series animation
+					// https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
+					series.appear(1000, 100);
+				},
+
+				getIndex() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/common/forIndex",
+            		})
+					.then(resp => {
+						this.data1 = resp.data.data[0];
+						this.data2 = resp.data.data[1];
+						this.data3 = resp.data.data[2];
+						this.data4 = resp.data.data[3];
+						this.data5 = resp.data.data[4];
+						this.data6 = resp.data.data[5];
+						this.data7 = resp.data.data[6];
+						this.data8 = resp.data.data[7];
+						this.data9 = resp.data.data[8];
+						this.data10 = resp.data.data[9];
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				getKnowledge() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/knowledge/getKnowledge",
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.knowledges = resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				setName() {
+					const urlParams = new URLSearchParams(window.location.search);
+					const value = urlParams.get('name');
+					if (value != null) {
+						localStorage.setItem("nameForUser", value);
+					}
+					console.log(value);
+				}
+
+            },
+            mounted() {
+				this.getIndex();
+				setTimeout(() => {
+					this.amcharts3_initialize();
+				}, 1000);
+				this.getKnowledge();
+				this.setName();
+
+            },
+			filters:{
+				formatDate: function(value,args) {
+					var dt = new Date(value);
+					if(args == 'yyyy-M-d') {// yyyy-M-d
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${year}-${month}-${date}`;
+					} else if(args == 'yyyy-M-d H:m:s'){// yyyy-M-d H:m:s
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						let hour = dt.getHours();
+						let minute = dt.getMinutes();
+						let second = dt.getSeconds();
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					} else if(args == 'yyyy-MM-dd') {// yyyy-MM-dd
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						return `${year}-${month}-${date}`;
+					} else if (args == 'MM-dd') {
+						// let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${month}-${date}`;
+
+					} else {// yyyy-MM-dd HH:mm:ss
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						let hour = dt.getHours().toString().padStart(2,'0');
+						let minute = dt.getMinutes().toString().padStart(2,'0');
+						let second = dt.getSeconds().toString().padStart(2,'0');
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					}
+        		}
+			},
+
+
+
+
+   		})
+           
+        
+       
+	</script>
+</html>
+
+
+
+

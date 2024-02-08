@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <admin_sidebar></admin_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">人员管理</h1>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+
+
+
+									<div class="card card-flush mb-7">
+
+										<div class="card-header align-items-center py-5 gap-2 gap-md-5">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-calendar-week" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">人员信息</h3>
+											</div>
+
+											<div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+												
+												<!-- <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+													<span class="svg-icon svg-icon-2">
+														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<rect opacity="0.3" x="12.75" y="4.25" width="12" height="2" rx="1" transform="rotate(90 12.75 4.25)" fill="currentColor" />
+															<path d="M12.0573 6.11875L13.5203 7.87435C13.9121 8.34457 14.6232 8.37683 15.056 7.94401C15.4457 7.5543 15.4641 6.92836 15.0979 6.51643L12.4974 3.59084C12.0996 3.14332 11.4004 3.14332 11.0026 3.59084L8.40206 6.51643C8.0359 6.92836 8.0543 7.5543 8.44401 7.94401C8.87683 8.37683 9.58785 8.34458 9.9797 7.87435L11.4427 6.11875C11.6026 5.92684 11.8974 5.92684 12.0573 6.11875Z" fill="currentColor" />
+															<path opacity="0.3" d="M18.75 8.25H17.75C17.1977 8.25 16.75 8.69772 16.75 9.25C16.75 9.80228 17.1977 10.25 17.75 10.25C18.3023 10.25 18.75 10.6977 18.75 11.25V18.25C18.75 18.8023 18.3023 19.25 17.75 19.25H5.75C5.19772 19.25 4.75 18.8023 4.75 18.25V11.25C4.75 10.6977 5.19771 10.25 5.75 10.25C6.30229 10.25 6.75 9.80228 6.75 9.25C6.75 8.69772 6.30229 8.25 5.75 8.25H4.75C3.64543 8.25 2.75 9.14543 2.75 10.25V19.25C2.75 20.3546 3.64543 21.25 4.75 21.25H18.75C19.8546 21.25 20.75 20.3546 20.75 19.25V10.25C20.75 9.14543 19.8546 8.25 18.75 8.25Z" fill="currentColor" />
+														</svg>
+													</span>
+													导处报表
+												</button> -->
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">添加人员</button>
+												<div id="kt_ecommerce_report_views_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="excel">导出为Excel</a>
+													</div>
+													<div class="menu-item px-3">
+														<a href="#" class="menu-link px-3" data-kt-ecommerce-export="pdf">导出为PDF</a>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="card-body pt-0">
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table">
+												<thead>
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th style="text-align: center;">姓名</th>
+														<th style="text-align: center;">电话</th>
+														<th style="text-align: center;">权限</th>
+														<th style="text-align: center;">邮箱</th>
+														<th style="text-align: center;"></th>
+													</tr>
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+													<tr  v-for="person in people">
+														<td style="text-align: center;">
+															<span>{{person.name}}</span>
+														</td>
+														
+														<td style="text-align: center;">
+															<span>{{person.phone}}</span>
+														</td>
+                                                        <td style="text-align: center;">
+															<span>{{person.role}}</span>
+														</td>
+														<td style="text-align: center;">
+															<span>{{person.email}}</span>
+														</td>
+														<td  style="text-align: center;">
+															<a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit_content" @click="editPerson(person.id, person.name, person.phone, person.role, person.email)">编辑</a>
+															<a class="btn btn-primary btn-sm" @click="deletePerson(person.name)">删除</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+
+
+
+									
+
+
+
+                                
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">添加人员</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">姓名</label>
+										<input type="text" class="form-control form-control-solid" v-model="add_people.name"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">电话</label>
+										<input type="text" class="form-control form-control-solid" v-model="add_people.phone"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">权限</label>
+										<div class="d-flex flex-wrap align-items-center text-gray-600 gap-5 mb-7">
+											<div class="form-check form-check-custom form-check-solid">
+												<input v-model="add_people.role" class="form-check-input" type="radio" name="conditions" value="管理员" id="one" />
+												<label class="form-check-label" for="one">管理员</label>
+											</div>
+											<div class="form-check form-check-custom form-check-solid">
+												<input v-model="add_people.role" class="form-check-input" type="radio" name="conditions" value="运维人员" id="two"/>
+												<label class="form-check-label" for="two">运维人员</label>
+											</div>
+										</div>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">邮箱</label>
+										<input v-model="add_people.email" type="text" class="form-control form-control-solid"/>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="addPerson()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="modal fade" id="edit_content" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">编辑</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">姓名</label>
+										<input type="text" class="form-control form-control-solid" v-model="edit_people.name"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">电话</label>
+										<input type="text" class="form-control form-control-solid" v-model="edit_people.phone"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">权限</label>
+										<div class="d-flex flex-wrap align-items-center text-gray-600 gap-5 mb-7">
+											<div class="form-check form-check-custom form-check-solid">
+												<!-- radio不能用checked，就用v-model和value组合的方式，它会自动帮你判断 -->
+												<input v-model="edit_people.role" value="管理员" class="form-check-input" type="radio" name="conditions" id="one"/>
+												<label class="form-check-label" for="one">管理员</label>
+											</div>
+											<div class="form-check form-check-custom form-check-solid">
+												<input   v-model="edit_people.role" class="form-check-input" value="运维人员" type="radio" name="conditions" id="two"/>
+												<label class="form-check-label" for="two">运维人员</label>
+											</div>
+										</div>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">邮箱</label>
+										<input type="text" class="form-control form-control-solid" v-model="edit_people.email"/>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="editPerson2()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+
+	<script src="/ownJS/people.js"></script>
+
+	<script>
+        
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "admin_sidebar": httpVueLoader("/plug_in/admin_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+				people: [{
+					id: "",
+					name: "",
+					phone: "123456789",
+					email: "",
+					role: "",
+					birthday: "12",
+					sex: "",
+					qq: "",  // 开头不能大写，否则会报错
+					dingDing: ""
+				}],
+				add_people: {
+					name: "",
+					phone: "",
+					email: "",
+					role: "",
+				},
+				edit_people: {
+					id: "",
+					name: "",
+					phone: "",
+					email: "",
+					role: "",
+				},
+            },
+			methods: {
+
+				// 获得账户信息
+				getPerson() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/person/getAllPerson",
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.people = resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 添加人员
+				addPerson() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/person/addPerson",
+						data: JSON.stringify(this.add_people)
+            		})
+					.then(resp => {
+						location.reload();
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				deletePerson(name) {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/person/deletePerson",
+						data: JSON.stringify({"name": name})
+            		})
+					.then(resp => {
+						location.reload();
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 取出当前编辑的人员信息
+				editPerson(id, name, phone, role, email) {
+					this.edit_people.id = id;
+					this.edit_people.name = name;
+					this.edit_people.phone = phone;
+					this.edit_people.email = email;
+					this.edit_people.role = role;
+				},
+
+				// 编辑人员信息
+				editPerson2() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/person/editPerson",
+						data: JSON.stringify(this.edit_people)
+            		})
+					.then(resp => {
+						location.reload();
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+
+				}
+				
+
+            },
+
+            mounted() {
+				this.getPerson();
+            },
+			
+			
+
+   		})
+
+       
+	</script>
+</html>
+
+
+
+

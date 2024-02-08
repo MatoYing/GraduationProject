@@ -1,0 +1,57 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: SpringBoot-prometheus
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource # 不用druid了，这个更强 com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: yan20001011yan
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://182.92.232.96:3306/monitor?useSSL=false&useUnicode=true&characterEncoding=UTF-8  # useSSL关闭，否则项目发布到Linux不能用
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 50           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+      pool-name: ClearingHikariCP     # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      connection-test-query: SELECT 1 # 连接测试语句
+  redis:
+    host: 182.92.232.96
+    port: 6379
+    password: yan2000
+    database: 1
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+#  zipkin:
+#    base-url: http://localhost:9411
+#    sender:
+#      type: web # 数据收集方式：web、kafka、rabbit，我使用的是最简单的web，别的方式请自行学习
+#    discovery-client-enabled: false # 是否启用服务发现
+#  sleuth:
+#    sampler:
+#      probability: 1.0 # sleuth 日志记录采样率，1为100%，默认为0.1即10%，正式环境视情况修改该配置。
+
+mybatis:
+  type-aliases-package: com.zust.ysc.entity
+  mapper-locations: classpath:mapper/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # yml中配置*，需要加引号
+        include: '*'  # 该配置为开启Actuator服务，因为SpringBoot Actuator会自动配置一个URL为/actuator/Prometheus的HTTP服务来供Prometheus抓取数据，不过默认该服务是关闭的，该配置将打开所有的Actuator服务。
+  metrics:
+    tags:
+      application: ${spring.application.name}  # 该配置会将该工程应用名称添加到计量器注册表的tag中去，方便后边Prometheus根据应用名称来区分不同的服务。
+
+# 自定义值
+SnowflakeUtil:
+  datacenterId: 1
+  machineId: 1
+
+

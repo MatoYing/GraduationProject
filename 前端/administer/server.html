@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <admin_sidebar></admin_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">服务器监控</h1>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+
+
+
+									<div class="card card-flush mb-7">
+
+										<div class="card-header align-items-center py-5 gap-2 gap-md-5">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-calendar-week" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">功能组件</h3>
+											</div>
+
+											
+										</div>
+
+										<div class="card-body pt-0">
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table">
+												<thead>
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th style="text-align: center;">名称</th>
+                                                        <th style="text-align: center;">版本</th>
+														<th style="text-align: center;">地址</th>
+														<th style="text-align: center;">状态</th>
+													</tr>
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+                                                    <tr>
+														<td style="text-align: center;">MySQl</td>
+														<td style="text-align: center;">5.7</td>
+                                                        <td style="text-align: center;">182.92.232.96:3306</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Redis</td>
+														<td style="text-align: center;">6.2.7</td>
+                                                        <td style="text-align: center;">182.92.232.96:6379</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">MinIO</td>
+														<td style="text-align: center;">RELEASE.2022-11-17T23-20-09Z</td>
+                                                        <td style="text-align: center;">182.92.232.96:9000</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">SpringBoot</td>
+														<td style="text-align: center;"></td>
+                                                        <td style="text-align: center;">127.0.0.1:80</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">InfluxDB</td>
+														<td style="text-align: center;">1.8</td>
+                                                        <td style="text-align: center;">127.0.0.1:8086</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Prometheus</td>
+														<td style="text-align: center;">v.2.41.0</td>
+                                                        <td style="text-align: center;">127.0.0.1:9090</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Alertmanager</td>
+														<td style="text-align: center;">v0.25.0</td>
+                                                        <td style="text-align: center;">127.0.0.1:9093</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Consul</td>
+														<td style="text-align: center;">1.15.1</td>
+                                                        <td style="text-align: center;">127.0.0.1:8500</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Grafana</td>
+														<td style="text-align: center;">9.3.2</td>
+                                                        <td style="text-align: center;">127.0.0.1:3000</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Elastalert</td>
+														<td style="text-align: center;">2.11.0</td>
+                                                        <td style="text-align: center;">39.98.60.186</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Kafka</td>
+														<td style="text-align: center;">2.8.1</td>
+                                                        <td style="text-align: center;">39.98.60.186:9092</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">ElasticSearch</td>
+														<td style="text-align: center;">7.7.1</td>
+                                                        <td style="text-align: center;">39.98.60.186:9200</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Logstash</td>
+														<td style="text-align: center;">7.7.1</td>
+                                                        <td style="text-align: center;">39.98.60.186:5044</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Kibana</td>
+														<td style="text-align: center;">7.7.1</td>
+                                                        <td style="text-align: center;">39.98.60.186:5601</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+                                                    <tr>
+														<td style="text-align: center;">Zookeeper</td>
+														<td style="text-align: center;">3.4.14</td>
+                                                        <td style="text-align: center;">39.98.60.186:2181</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+													<tr>
+														<td style="text-align: center;">Jenkins</td>
+														<td style="text-align: center;">2.387.3</td>
+                                                        <td style="text-align: center;">47.92.212.27:8080/</td>
+                                                        <td style="text-align: center;"><div class="badge badge-light-success">正常</div></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+                                
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script>
+		
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "admin_sidebar": httpVueLoader("/plug_in/admin_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+				
+            },
+			methods: {
+
+
+            },
+
+            mounted() {
+				
+            },
+			
+			
+
+   		})
+
+       
+	</script>
+</html>
+
+
+
+

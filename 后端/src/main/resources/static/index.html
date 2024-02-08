@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+        }
+        .container {
+            height: 100%;
+            background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        }
+        .login-wrapper {
+            background-color: #fff;
+            width: 358px;
+            height: 588px;
+            border-radius: 15px;
+            padding: 0 50px;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .header {
+            font-size: 38px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 200px;
+        }
+        .input-item {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+        }
+        .input-item:placeholder {
+            text-transform: uppercase;
+        }
+        .btn {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: 40px;
+            background-image: linear-gradient(to right, #a6c1ee, #fbc2eb);
+            color: #fff;
+        }
+        .msg {
+            text-align: center;
+            line-height: 88px;
+        }
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-wrapper">
+            <div class="header">Login</div>
+            <div class="form-wrapper">
+                <input type="text" name="username" placeholder="用户名" class="input-item" id="el1">
+                <input type="password" name="password" placeholder="密码" class="input-item" id="el2">
+
+                <div><button class="btn" onclick="method1()">登录</button></div>
+                <div><button class="btn" onclick="method2()">QQ登录</button></div>
+            </div>
+            <div class="msg">
+                没有账户？
+                <a href="#" onclick="method3()">注册</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function method1() {
+            alert("账号或密码错误");
+            document.getElementById('el1').value=''
+            document.getElementById('el2').value=''
+        }
+        function method2() {
+
+            fetch("/login/loginByQQ", {
+                method: "post",
+            }).then(function (r) {
+                return r.json()
+            }).then((r) => {
+                window.open(r.data, "_self");
+                console.log(r);
+            })
+            // alert("QQ登录暂未开放");
+        }
+        function method3() {
+            alert("目前不接受新人用户");
+        }
+
+        function method4() {
+            // 与QQ有点不同，QQ需要后端请求返回一个URL，而钉钉是固定的
+            window.open("https://login.dingtalk.com/oauth2/auth?redirect_uri=http://127.0.0.1/login/callback2&response_type=code&client_id=ding91tq9woqjqwy8d3i&scope=openid&prompt=consent", "_self");
+        }
+    </script>
+</body>
+</html>

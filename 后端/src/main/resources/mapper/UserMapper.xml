@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zust.ysc.dao.UserDao">
+<!--    <select id="" resultType="">-->
+<!--        -->
+<!--    </select>-->
+
+    <insert id="insertUser">
+        INSERT INTO user(ID,
+                         phone,
+                         password)
+        VALUES(#{ID},
+               #{phone},
+               #{password});
+    </insert>
+
+<!--    <select id="selectUser" resultType="com.zust.ysc.entity.User">-->
+<!--        SELECT *-->
+<!--        FROM user-->
+<!--        WHERE ID = #{ID};-->
+<!--    </select>-->
+</mapper>

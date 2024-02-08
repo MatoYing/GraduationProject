@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">通知</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">通知</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <div class="card mb-5 mb-xxl-8">
+										<form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row">
+                                            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                                                <div class="card card-flush py-4">
+                                                    <div class="card-header">
+                                                        <div class="card-title">
+                                                            <h2>发布通知</h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body pt-0">
+                                                        <div class="mb-10 fv-row">
+                                                            <label class="required form-label">标题</label>
+                                                            <input type="text" class="form-control mb-2" placeholder="" v-model="knowledge.name" />
+                                                        </div>
+                                                        <div class="mb-10 fv-row">
+                                                            <label class="required form-label">内容</label>
+                                                            <input type="text" class="form-control mb-2" placeholder="" v-model="knowledge.content" />
+                                                        </div>
+                                                        <div class="mb-10 fv-row" @click="controllerFile()">
+                                                            <label class="form-label">文件</label>
+                                                            <div class="fv-row mb-2">
+																<div class="dropzone" id="kt_ecommerce_add_product_media">
+																	<div class="dz-message needsclick">
+																		<i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+																		<div class="ms-4">
+																			<h3 class="fs-5 fw-bold text-gray-900 mb-1">选择文件</h3>
+																			<span class="fs-7 fw-semibold text-gray-400">{{fileName}}</span>
+																		</div>
+                                                                        <input type="file" style="opacity:0;" ref="fileInput" @change="editStyle()"/>
+																	</div>
+																</div>
+															</div>
+                                                        </div>
+                                                        <div class="mb-10 fv-row d-flex justify-content-end">
+                                                            <button @click="addKnowledge()" type="button" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                                                                <span class="indicator-label">发布</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+									</div>
+
+
+
+                                    <div class="card">
+										<div class="card-header card-header-stretch">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-bookmarks" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">通知信息</h3>
+											</div>
+										</div>
+
+										<div class="card-body">
+											<div id="kt_activity_today" class="card-body p-0 tab-pane fade show active" role="tabpanel" aria-labelledby="kt_activity_today_tab">
+												<div class="timeline" >
+													<div class="timeline-item" v-for="knowledge2 in knowledges">
+														<div class="timeline-line w-40px"></div>
+														<div class="timeline-icon symbol symbol-circle symbol-40px">
+															<div class="symbol-label bg-light">
+																<span class="svg-icon svg-icon-2 svg-icon-gray-500"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">	<path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="currentColor" />	<path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="currentColor" /></svg></span>
+															</div>
+														</div>
+														<div class="timeline-content mb-10 mt-n1">
+															<div class="pe-3 mb-5">
+																<div class="fs-5 fw-semibold mb-2">{{knowledge2.people}}</div>
+																<div class="d-flex align-items-center mt-1 fs-6">
+																	<div class="text-muted me-2 fs-7">
+																		发布于{{knowledge2.date|formatDate('yyyy-M-d')}}
+																		&nbsp;
+																		<a v-if="knowledge.people == knowledge2.people" @click="deleteKnowledge(knowledge2.name)" href="#">删除</a>
+																	</div>
+																</div>
+															</div>
+															<div class="overflow-auto pb-5">
+																<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed min-w-lg-600px flex-shrink-0 p-6">
+																	<div class="d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap">
+																		<div class="mb-3 mb-md-0 fw-semibold">
+																			<h4 class="text-gray-900 fw-bold mb-0">{{knowledge2.name}}</h4>
+																			<div class="fs-6 text-gray-700 pe-7">{{knowledge2.content}}</div>
+																		</div>
+																		<a :href="'http://182.92.232.96:9000/knowledge/' + knowledge2.name + '.docx'"  class="btn btn-primary px-6 align-self-center text-nowrap">下载</a>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+
+
+	<script>
+		
+    
+        
+        
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+                fileName: "文件名",
+				knowledge: {
+					name: "",
+					content: "",
+					date: "",
+					address: "",
+					people: localStorage.getItem("nameForUser"),
+				},
+				knowledges: [{
+						name: "ds",
+						content: "ds",
+						date: "ds",
+						address: "ds",
+						people: "ds",
+					},
+				],
+					
+            },
+			methods: {
+
+				// 帮助点击file的input
+				controllerFile() {
+                    this.$refs.fileInput.click();
+					// window.open("http://182.92.232.96:9000/sound/Test1.mp3");
+                },
+
+				// 选择文件后显示文件名
+                editStyle() {
+                    this.fileName = this.$refs.fileInput.files[0].name;
+                },
+				
+				// 获取所有的知识库
+				getKnowledge() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/knowledge/getKnowledge",
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.knowledges = resp.data.data;
+						console.log(this.knowledges);
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 向MinIO上传文件
+				// uploadKnowledge() {
+				// 	// this.$refs.fileInput.files[0];
+				// 	this.uploadFile(this.$refs.fileInput.files[0], this.$refs.fileInput.files[0].name);
+				// },
+
+				// 上传文件
+				async uploadFile(file) {
+  					const xhr = new XMLHttpRequest();
+  					xhr.open('PUT', 'http://182.92.232.96:9000/knowledge/' + this.knowledge.name + '.docx', true);
+  					xhr.setRequestHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  					xhr.setRequestHeader('x-amz-acl', 'public-read'); // 可选，如果需要对上传的文件设置访问权限
+  					xhr.onload = function() {
+  					  if (xhr.status === 200) {
+  					    console.log('文件上传成功');
+  					  } else {
+  					    console.error('文件上传失败', xhr.responseText);
+  					  }
+  					};
+  					xhr.send(file);
+				},
+
+				// 添加知识库
+				addKnowledge() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/knowledge/addKnowledge",
+						data: JSON.stringify(this.knowledge),
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.uploadFile(this.$refs.fileInput.files[0])
+						setTimeout(function (){
+							// 刷新页面
+							location.reload();
+						}, 4000);
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 删除知识库
+				deleteKnowledge(name) {
+					// 引入minio，用cdn的方式连接，进行添加删除。这里删除我就不做了，因为相同名字可以直接覆盖
+					// <script src="https://cdn.jsdelivr.net/npm/minio@7.1.0/minio.js">
+						axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/knowledge/deleteKnowledge",
+						data: JSON.stringify({"name": name}),
+            		})
+					.then(resp => {
+						this.getKnowledge();
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				}
+            },
+
+            mounted() {
+				this.getKnowledge();
+            },
+			filters:{
+				formatDate: function(value,args) {
+					var dt = new Date(value);
+					if(args == 'yyyy-M-d') {// yyyy-M-d
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${year}-${month}-${date}`;
+					} else if(args == 'yyyy-M-d H:m:s'){// yyyy-M-d H:m:s
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						let hour = dt.getHours();
+						let minute = dt.getMinutes();
+						let second = dt.getSeconds();
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					} else if(args == 'yyyy-MM-dd') {// yyyy-MM-dd
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						return `${year}-${month}-${date}`;
+					} else {// yyyy-MM-dd HH:mm:ss
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						let hour = dt.getHours().toString().padStart(2,'0');
+						let minute = dt.getMinutes().toString().padStart(2,'0');
+						let second = dt.getSeconds().toString().padStart(2,'0');
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					}
+        		}
+			},
+
+			
+			
+			
+
+   		})
+
+       
+	</script>
+</html>
+
+
+
+

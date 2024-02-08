@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <admin_sidebar></admin_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">拓扑图</h1>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="card rounded-0">
+										<div class="card-body pt-0 pb-0" style="padding-left: 0px; padding-right: 0px; height: 725.5px;">
+											<!-- &kiosk属性可以去掉Grafana的sidebar和header -->
+											<!-- <iframe :src="grafana + '&theme=light&kiosk'" width="1260" height="725.5" frameborder="0"></iframe> -->
+                                            <div id="main" style="width: 1260px; height:725.5px;"></div>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+	<script>
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "admin_sidebar": httpVueLoader("/plug_in/admin_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+            },
+        	data: {
+            	grafana: localStorage.getItem("grafana")
+        	},
+			methods: {
+                draw() {
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main'));
+                    // 指定图表的配置项和数据
+                    var option = {
+                        title: {
+                            // text: 'Basic Graph'
+                        },
+                        tooltip: {},
+                        animationDurationUpdate: 1500,
+                        animationEasingUpdate: 'quinticInOut',
+                        series: [
+                            {
+                                type: 'graph',
+                                layout: 'none',
+                                symbolSize: 50,
+                                roam: true,
+                                label: {
+                                    show: true
+                                },
+                                edgeSymbol: ['circle', 'arrow'],
+                                edgeSymbolSize: [4, 10],
+                                edgeLabel: {
+                                    fontSize: 20
+                                },
+                                data: [
+                                    {
+                                        name: '服务器1',
+                                        x: 550,
+                                        y: 100,
+                                        text: '<h2>127.0.0.1</h2>SpringBoot(80)<br/>InfluxDB(8086)<br/>Prometheus(9090)<br/>Alertmanager(9093)<br/>Consul(8500)<br/>Grafana(3000)',
+                                        tooltip: {
+                                            formatter: function (x) {
+                                                return x.data.text;
+                                            }
+                                        }
+                                    },
+                                    {
+                                        name: '服务器2',
+                                        x: 300,
+                                        y: 300,
+                                        text: '<h2>182.92.232.96</h2>MySQL(3306)<br/>Redis(6379)<br/>MinIO(9000)',
+                                        tooltip: {
+                                            formatter: function (x) {
+                                                return x.data.text;
+                                            }
+                                        }
+                                    },
+                                    {
+                                        name: '服务器3',
+                                        x: 800,
+                                        y: 300,
+                                        text: '<h2>39.98.60.186</h2>Elastalert<br/>Kafka(9092)<br/>ElasticSearch(9200)<br/>Logstash(5044)<br/>Kibana(5601)<br/>Zookeeper(2181)<br/>',
+                                        tooltip: {
+                                            formatter: function (x) {
+                                                return x.data.text;
+                                            }
+                                        }
+                                    },
+                                    {
+                                        name: '服务器4',
+                                        x: 550,
+                                        y: 500,
+                                        text: '<h2>47.92.212.27</h2>Jenkins(8080)',
+                                        tooltip: {
+                                            formatter: function (x) {
+                                                return x.data.text;
+                                            }
+                                        }
+                                    }
+                                ],
+                                links: [
+                                    {
+                                        source: "服务器2",
+                                        target: "服务器1",
+                                    },
+                                    {
+                                        source: '服务器3',
+                                        target: '服务器1',
+                                    },
+                                    {
+                                        source: '服务器1',
+                                        target: '服务器4',
+                                    },
+                                ],
+                                lineStyle: {
+                                    opacity: 0.9,
+                                    width: 2,
+                                    curveness: 0
+                                }
+                            }
+                        ]
+                    };
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                }
+            },
+            mounted() {
+                this.draw();
+            },
+
+
+
+
+   		})
+           
+        
+       
+	</script>
+</html>
+
+
+
+

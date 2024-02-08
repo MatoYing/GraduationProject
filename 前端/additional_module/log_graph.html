@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">日志可视化</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">
+												<a href="/monitor_module/log_monitor.html" class="text-muted text-hover-primary">日志监控</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">
+												日志可视化
+											</li>
+										</ul>
+									</div>
+
+									<div class="d-flex align-items-center gap-2 gap-lg-3">
+										<a href="http://39.98.60.186:5601/app/kibana#/dashboards?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15M,to:now))" target="_blank" class="btn btn-sm btn-flex bg-body btn-color-gray-700 btn-active-color-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											<i class="bi bi-box-arrow-down" style="font-size: 1.2rem;"></i>
+											&nbsp;&nbsp;Kibana
+										</a>
+										<a href="/monitor_module/log_monitor.html" class="btn btn-sm btn-flex bg-body btn-color-gray-700 btn-active-color-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+											<i class="bi bi-arrow-left-circle" style="font-size: 1.2rem;"></i>
+											&nbsp;&nbsp;返&nbsp;回
+										</a>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+									<div class="card rounded-0">
+										<div class="card-body pt-0 pb-0" style="padding-left: 0px; padding-right: 0px; height: 725.5px;">
+											<!-- &kiosk属性可以去掉Grafana的sidebar和header -->
+											<!-- <iframe :src="grafan + '&theme=light&kiosk'" width="1260" height="725.5" frameborder="0"></iframe> -->
+											<!-- <iframe src="http://39.98.60.186:5601/app/kibana#/dashboard/0839ba40-df1d-11ed-8fcb-4db92fe9190c?_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:b4cbbdf2-1a53-4f8a-970d-2f9358f93f9e,w:24,x:0,y:0),id:'0a1f5510-df1b-11ed-8fcb-4db92fe9190c',panelIndex:b4cbbdf2-1a53-4f8a-970d-2f9358f93f9e,type:visualization,version:'7.7.1')),query:(language:kuery,query:''),timeRestore:!f,title:try,viewMode:view)&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&embed=true" width="1260" height="725.5" frameborder="0"></iframe> -->
+											<!-- <iframe src="http://39.98.60.186:5601/goto/cfea3ce31f38460d0e4ba199d2cd34d0" height="600" width="800"></iframe> -->
+											<!-- <iframe src="http://39.98.60.186:5601/app/kibana#/dashboard/869ae520-f58f-11ed-9369-191a7e6cefe3?showTopMenu=false&embed=true&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:'15b04dbc-4226-48f7-afc8-fdc8409d8a6a',w:24,x:0,y:0),id:cc39e940-f58b-11ed-9369-191a7e6cefe3,panelIndex:'15b04dbc-4226-48f7-afc8-fdc8409d8a6a',type:visualization,version:'7.7.1'),(embeddableConfig:(),gridData:(h:15,i:'4abdcf85-2e5a-4d6f-ba50-4be164658dc3',w:24,x:24,y:0),id:'6f2668b0-f58f-11ed-9369-191a7e6cefe3',panelIndex:'4abdcf85-2e5a-4d6f-ba50-4be164658dc3',type:visualization,version:'7.7.1')),query:(language:kuery,query:''),timeRestore:!f,title:upset,viewMode:view)&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15M,to:now))&hideFilterBar=true" height="725.5" width="1260" frameborder="0"></iframe> -->
+											<iframe :src="grafana" height="725.5" width="1260"></iframe>
+										</div>
+									</div>
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+	<script>
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+            },
+        	data: {
+            	grafana: localStorage.getItem("grafana")
+        	},
+			methods: {
+                
+            },
+            mounted() {
+
+            },
+
+
+
+
+   		})
+           
+        
+       
+	</script>
+</html>
+
+
+
+

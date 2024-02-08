@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--更多资源： -->
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <title>基础平台监管系统</title>
+        <!--大屏-->
+        <link type="text/css" href="css/public.css" rel="stylesheet" />
+        <link type="text/css" href="css/icon.css" rel="stylesheet" />
+        <link type="text/css" href="css/index.css" rel="stylesheet" />
+        <script type="text/javascript">
+          document.documentElement.style.fontSize =
+            (document.documentElement.clientWidth / 768) * 100 + 'px'
+        </script>
+        <script src="js/echarts.min.js"></script>
+    </head>
+    <body>
+        <div class="bg" id="vue_body">
+          <div class="title">基础平台监管系统</div>
+          <div class="leftMain">
+
+
+            <div class="leftMain_top">
+              <div class="leftMain_topIn">
+                <ul>
+                  <li>
+                    <div class="liIn">
+                      <h3>已完成巡检数</h3>
+                      <p class="shu">
+                        <span class="shu1">{{this.data1}}</span><i>个</i>
+                      </p>
+                      <span class="border_bg_leftTop"></span><span class="border_bg_rightTop"></span><span class="border_bg_leftBottom"></span><span class="border_bg_rightBottom"></span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="liIn">
+                      <h3>普通告警数</h3>
+                      <p class="shu">
+                        <span class="shu2">{{this.data2}}</span><i>个</i>
+                      </p>
+                      <span class="border_bg_leftTop"></span><span class="border_bg_rightTop"></span><span class="border_bg_leftBottom"></span><span class="border_bg_rightBottom"></span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="liIn">
+                      <h3>中级告警数</h3>
+                      <p class="shu">
+                        <span class="shu3">{{this.data3}}</span><i>个</i>
+                      </p>
+                      <span class="border_bg_leftTop"></span><span class="border_bg_rightTop"></span><span class="border_bg_leftBottom"></span><span class="border_bg_rightBottom"></span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="liIn">
+                      <h3>高级告警数</h3>
+                      <p class="shu">
+                        <span class="shu4">{{this.data4}}</span><i>个</i>
+                      </p>
+                      <span class="border_bg_leftTop"></span><span class="border_bg_rightTop"></span><span class="border_bg_leftBottom"></span><span class="border_bg_rightBottom"></span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+
+            <div class="leftMain_middle">
+              <div class="leftMain_middle_left">
+                <div class="leftMain_middle_leftIn">
+                  <h3>近十日报警数</h3>
+                  <div class="biaoge" style="width: 100%; height: 25vh" id="chartmain"></div>
+                  <span class="border_bg_leftTop"></span>
+                  <span class="border_bg_rightTop"></span>
+                  <span class="border_bg_leftBottom"></span>
+                  <span class="border_bg_rightBottom"></span>
+                </div>
+              </div>
+
+
+
+              <div class="leftMain_middle_right">
+                <div class="leftMain_middle_rightIn">
+                  <h3>报警数排名</h3>
+                  <div class="biaoge biaoge_pai" style="width: 100%; height: 25vh">
+                    <div class="biaoge_paiIn">
+                      <ul>
+                        <li>
+                          <div class="liIn">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">Node-Exporter</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="liIn liIn2">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">Kafka-Log</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li>
+                        <!-- <li>
+                          <div class="liIn liIn3">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">Docker</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="liIn liIn4">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">Node-exporter</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="liIn liIn5">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">第五名</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="liIn liIn6">
+                            <div class="liIn_left">
+                              <span class="bot"></span>
+                              <span class="zi">Kafka</span>
+                            </div>
+                            <div class="liIn_line">
+                              <div class="line_lineIn" style="width: 100%"></div>
+                            </div>
+                            <p class="num">100%</p>
+                          </div>
+                        </li> -->
+                      </ul>
+                    </div>
+                  </div>
+                  <span class="border_bg_leftTop"></span>
+                  <span class="border_bg_rightTop"></span>
+                  <span class="border_bg_leftBottom"></span>
+                  <span class="border_bg_rightBottom"></span>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="leftMain_middle">
+              <div class="leftMain_middle_left">
+                <div class="leftMain_middle_leftIn">
+                  <h3>近五日报警数详情</h3>
+                  <div class="biaoge" style="width: 100%; height: 25vh" id="chartmain_zhe"></div>
+                  <span class="border_bg_leftTop"></span>
+                  <span class="border_bg_rightTop"></span>
+                  <span class="border_bg_leftBottom"></span>
+                  <span class="border_bg_rightBottom"></span>
+                </div>
+              </div>
+
+
+
+              <div class="leftMain_middle_right">
+                <div class="leftMain_middle_rightIn">
+                  <h3>今日数据</h3>
+                  <div class="biaoge biaoge_bi" style="width: 100%; height: 25vh">
+                    <ul>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu1">{{1}}</p>
+                          <p class="zi">巡检计划数</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu2">{{a16}}</p>
+                          <p class="zi">巡检完成数</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu3">{{2}}</p>
+                          <p class="zi">初级告警数</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu4">{{1}}</p>
+                          <p class="zi">中级告警数</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu5">{{a19}}</p>
+                          <p class="zi">严重告警数</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="liIn">
+                          <p class="shu shu6">{{1}}</p>
+                          <p class="zi">解决告警数</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <span class="border_bg_leftTop"></span>
+                  <span class="border_bg_rightTop"></span>
+                  <span class="border_bg_leftBottom"></span>
+                  <span class="border_bg_rightBottom"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="rightMain">
+            <div class="rightMain_top">
+              <div class="rightMain_topIn">
+                <h3>分布表</h3>
+                <div class="biaoge" style="width: 100%; height: 30vh" id="chartmain_bing"></div>
+                <span class="border_bg_leftTop"></span>
+                <span class="border_bg_rightTop"></span>
+                <span class="border_bg_leftBottom"></span>
+                <span class="border_bg_rightBottom"></span>
+              </div>
+            </div>
+
+
+            <div class="rightMain_bottom">
+              <div class="rightMain_bottomIn">
+                <h3>运维人员</h3>
+                <div class="biaoge biaoge_list" style="width: 100%; height: 36vh">
+                  <ul class="ul_title">
+                    <li>姓名</li>
+                    <li>职位</li>
+                    <li>电话</li>
+                  </ul>
+                  <div class="ul_list">
+                    <div class="ul_listIn">
+                      <ul class="ul_con">
+                        <li>张三</li>
+                        <li>管理员</li>
+                        <li>13333461340</li>
+                      </ul>
+                      <ul class="ul_con">
+                        <li>李四</li>
+                        <li>运维人员</li>
+                        <li>19143508331</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <span class="border_bg_leftTop"></span>
+                <span class="border_bg_rightTop"></span>
+                <span class="border_bg_leftBottom"></span>
+                <span class="border_bg_rightBottom"></span>
+              </div>
+            </div>
+          </div>
+          <div style="clear: both"></div>
+        </div>
+      </body>
+
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+      <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	    <!-- <script src="/assets/js/scripts.bundle.js"></script> -->
+
+      <script>
+
+        new Vue({
+          el: "#vue_body",
+          components: {
+                          
+          },
+          data: {
+            data1: "",
+				    data2: "",
+				    data3: "",
+				    data4: "",
+				    data5: "",
+				    data6: "",
+				    data7: "",
+				    data8: "",
+				    data9: "",
+				    data10: "",
+            a1: "",
+            a2: "",
+            a3: "",
+            a4: "",
+            a5: "",
+            a5: "",
+            a6: "",
+            a7: "",
+            a8: "",
+            a9: "",
+            a10: "",
+            a11: "",
+            a12: "",
+            a13: "",
+            a14: "",
+            a15: "",
+            a16: "",
+            a17: "",
+            a18: "",
+            a19: "",
+            a20: "",
+            a21: ""
+          },
+          methods: {
+            getIndex() {
+					    axios({
+                method: "post",
+                headers: {
+					    		"Content-Type": "application/json;charset=UTF-8"
+                },
+					    	withCredentials: true,
+                url: "http://127.0.0.1:8088/common/forIndex",
+              })
+					    .then(resp => {
+					    	this.data1 = resp.data.data[0];
+					    	this.data2 = resp.data.data[1];
+					    	this.data3 = resp.data.data[2];
+					    	this.data4 = resp.data.data[3];
+					    	this.data5 = resp.data.data[4];
+					    	this.data6 = resp.data.data[5];
+					    	this.data7 = resp.data.data[6];
+					    	this.data8 = resp.data.data[7];
+					    	this.data9 = resp.data.data[8];
+					    	this.data10 = resp.data.data[9];
+                console.log(resp.data.data);
+              })
+              .catch(err => {
+                	console.log(err);
+              })
+				    },
+
+            init1() {
+              var dataAxis = [
+                      '-10日', '-9日', '-8日', '-7日', '-6日', '-5日', '-4日', '-3日', '-2日', '-1日'
+                    ]
+                    var data = [
+                      0, 0, 0, 0, 0, parseInt(this.a5) + parseInt(this.a10) + parseInt(this.a15), parseInt(this.a4) + parseInt(this.a9) + parseInt(this.a14), parseInt(this.a3) + parseInt(this.a8) + parseInt(this.a13), parseInt(this.a2) + parseInt(this.a7) + parseInt(this.a12), parseInt(this.a1) + parseInt(this.a6) + parseInt(this.a11)
+                    ]
+                    var yMax = 30
+                    var dataShadow = []
+                    for (var i = 0; i < data.length; i++) {
+                      dataShadow.push(yMax)
+                    }
+                    option = {
+                      title: {
+                        text: '',
+                        subtext: ''
+                      },
+                      grid: {
+                        x: 40,
+                        y: 40,
+                        x2: 20,
+                        y2: 20
+                      },
+                      xAxis: {
+                        data: dataAxis,
+                        axisLabel: {
+                          /*inside: true,*/
+                          interval: 0,
+                          textStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                          }
+                        },
+                        axisTick: {
+                          show: false
+                        },
+                        axisLine: {
+                          show: true,
+                          symbol: ['none', 'arrow'],
+                          symbolOffset: 12,
+                          lineStyle: {
+                            color: '#fff'
+                          }
+                        },
+                        z: 10
+                      },
+                      yAxis: {
+                        type: 'value',
+                        name: '数量：个',
+                        axisLine: {
+                          show: true,
+                          symbol: ['none', 'arrow'],
+                          symbolOffset: 12,
+                          lineStyle: {
+                            color: '#fff'
+                          }
+                        },
+                        axisTick: {
+                          show: false
+                        },
+                        axisLabel: {
+                          textStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                          }
+                        }
+                      },
+                      dataZoom: [
+                        {
+                          type: 'inside'
+                        }
+                      ],
+                      series: [
+                        {
+                          // For shadow
+                          type: 'bar',
+                          itemStyle: {
+                            color: 'rgba(0,0,0,0.05)'
+                          },
+                          barGap: '-100%',
+                          barCategoryGap: '40%',
+                          data: dataShadow,
+                          animation: false
+                        },
+                        {
+                          type: 'bar',
+                          itemStyle: {
+                            color: new echarts.graphic.LinearGradient(
+                              0,
+                              0,
+                              0,
+                              1,
+                              [
+                                { offset: 0, color: '#0efdff' },
+                                { offset: 0.5, color: '#188df0' },
+                                { offset: 1, color: '#188df0' }
+                              ]
+                            )
+                          },
+                          emphasis: {
+                            itemStyle: {
+                              color: new echarts.graphic.LinearGradient(
+                                0,
+                                0,
+                                0,
+                                1,
+                                [
+                                  { offset: 0, color: '#2378f7' },
+                                  { offset: 0.7, color: '#2378f7' },
+                                  { offset: 1, color: '#0efdff' }
+                                ]
+                              )
+                            }
+                          },
+                          data: data
+                        }
+                      ]
+                    }
+                    var myChart = echarts.init(
+                      document.getElementById('chartmain')
+                    )
+                    myChart.setOption(option)
+            },
+
+            init2() {
+              option = {
+                      title: {
+                        text: ''
+                      },
+                      tooltip: {
+                        trigger: 'axis'
+                      },
+                      legend: {
+                        textStyle: {
+                          color: '#fff',
+                          fontSize: 12
+                        },
+                        right: '10%',
+                        data: ['普通报警', '中级报警', "高级报警"]
+                      },
+                      grid: {
+                        x: 40,
+                        y: 40,
+                        x2: 20,
+                        y2: 20
+                      },
+                      toolbox: {
+                        feature: {
+                          //saveAsImage: {}
+                        }
+                      },
+                      xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        axisLabel: {
+                          /*inside: true,*/
+                          interval: 0,
+                          textStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                          }
+                        },
+                        axisTick: {
+                          show: false
+                        },
+                        axisLine: {
+                          show: true,
+                          symbol: ['none', 'arrow'],
+                          symbolOffset: 12,
+                          lineStyle: {
+                            color: '#fff'
+                          }
+                        },
+                        data: [
+                          '-5日',
+                          '-4日',
+                          '-3日',
+                          '-2日',
+                          '-1日',
+                        ]
+                      },
+                      yAxis: {
+                        type: 'value',
+
+                        axisLine: {
+                          show: true,
+                          symbol: ['none', 'arrow'],
+                          symbolOffset: 12,
+                          lineStyle: {
+                            color: '#fff'
+                          }
+                        },
+                        axisTick: {
+                          show: false
+                        },
+                        axisLabel: {
+                          textStyle: {
+                            color: '#fff',
+                            fontSize: 12
+                          }
+                        }
+                      },
+                      series: [
+                        {
+                          name: '普通报警',
+                          type: 'line',
+                          data: [this.a5, this.a4, this.a3, this.a2, this.a1],
+                          itemStyle: {
+                            normal: {
+                              color: '#0efdff', //折线点的颜色
+                              lineStyle: {
+                                color: '#0efdff', //折线的颜色
+                                width: 2
+                              }
+                            }
+                          }
+                        },
+                        {
+                          name: '中级报警',
+                          type: 'line',
+                          data: [this.a10, this.a9, this.a8, this.a7, this.a6]
+                        },
+                        {
+                          name: '高级报警',
+                          type: 'line',
+                          data: [this.a15, this.a14, this.a13, this.a12, this.a11],
+                          itemStyle: {
+                            normal: {
+                              color: '#0efdff', //折线点的颜色
+                              lineStyle: {
+                                color: '#0efdff', //折线的颜色
+                                width: 2
+                              }
+                            }
+                          }
+                        },
+                      ]
+                    }
+                    //获取dom容器
+                    var myChart = echarts.init(
+                      document.getElementById('chartmain_zhe')
+                    )
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option)
+                    //};
+            },
+
+            init3() {
+              option = {
+                    title: {
+                      text: '数据情况统计',
+                      subtext: '',
+                      left: 'right',
+                      textStyle: {
+                        color: '#fff',
+                        fontSize: 12
+                      }
+                    },
+                    tooltip: {
+                      trigger: 'item',
+                      formatter: '{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                      // orient: 'vertical',
+                      // top: 'middle',
+                      type: 'scroll',
+                      orient: 'vertical',
+                      right: 10,
+                      top: 40,
+                      bottom: 20,
+                      left: 'right',
+                      data: ['指标', '日志'],
+                      textStyle: {
+                        color: '#fff',
+                        fontSize: 12
+                      }
+                    },
+                    grid: {
+                      x: '-10%',
+                      y: 40,
+                      x2: 20,
+                      y2: 20
+                    },
+                    color: [
+                      '#09d0fb',
+                      '#f88cfb',
+                    ],
+                    series: [
+                      {
+                        type: 'pie',
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                        selectedMode: 'single',
+                        data: [
+                          { value: this.data9, name: '指标' },
+                          { value: this.data10, name: '日志' },
+                        ],
+                        emphasis: {
+                          itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                          }
+                        }
+                      }
+                    ]
+                  }
+                  //获取dom容器
+                  var myChart = echarts.init(
+                    document.getElementById('chartmain_bing')
+                  )
+                  // 使用刚指定的配置项和数据显示图表。
+                  myChart.setOption(option)
+            }, 
+
+
+            getIndex2() {
+					    axios({
+                method: "post",
+                headers: {
+					    		"Content-Type": "application/json;charset=UTF-8"
+                },
+					    	withCredentials: true,
+                url: "http://127.0.0.1:8088/common/forBig",
+              })
+					    .then(resp => {
+					    	this.a1 = resp.data.data[0];
+                this.a2 = resp.data.data[1];
+                this.a3 = resp.data.data[2];
+                this.a4 = resp.data.data[3];
+                this.a5 = resp.data.data[4];
+                this.a6 = resp.data.data[5];
+                this.a7 = resp.data.data[6];
+                this.a8 = resp.data.data[7];
+                this.a9 = resp.data.data[8];
+                this.a10 = resp.data.data[9];
+                this.a11 = resp.data.data[10];
+                this.a12 = resp.data.data[11];
+                this.a13 = resp.data.data[12];
+                this.a14 = resp.data.data[13];
+                this.a15 = resp.data.data[14];
+                this.a16 = resp.data.data[15];
+                this.a17 = resp.data.data[16];
+                this.a18 = resp.data.data[17];
+                this.a19 = resp.data.data[18];
+                this.a20 = resp.data.data[19];
+                this.a21 = resp.data.data[20];
+                console.log(resp.data.data);
+              })
+              .catch(err => {
+                	console.log(err);
+              })
+				    },
+            
+          },
+          mounted() {
+            this.getIndex();
+            this.getIndex2();
+            setTimeout(() => {
+              this.init1();
+            }, 3000);
+            setTimeout(() => {
+              this.init2();
+            }, 3000);
+            setTimeout(() => {
+              this.init3();
+            }, 3000);
+
+          },
+          
+        })
+    
+           
+      </script>
+
+</html>

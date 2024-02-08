@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<title>Monitor</title>
+		<meta charset="utf-8" />
+        <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+		<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>
+        <link href="/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+	</head>
+
+	<body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
+		<div id="vue_body" class="d-flex flex-column flex-root app-root">
+			<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+
+				<home_header></home_header>
+				
+				<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+					
+                    <home_sidebar></home_sidebar>
+
+					<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+						<div class="d-flex flex-column flex-column-fluid">
+							<div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
+								<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+									<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+										<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">任务管理</h1>
+										<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+											<li class="breadcrumb-item text-muted">
+												<a href="/index.html" class="text-muted text-hover-primary">主页</a>
+											</li>
+											<li class="breadcrumb-item">
+												<span class="bullet bg-gray-400 w-5px h-2px"></span>
+											</li>
+											<li class="breadcrumb-item text-muted">任务管理</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div id="kt_app_content" class="app-content flex-column-fluid">
+								<div id="kt_app_content_container" class="app-container container-xxl">
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+
+
+
+									<div class="card card-flush mb-7">
+
+										<div class="card-header card-header-stretch">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-calendar-week" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">待提交巡检报告</h3>
+											</div>
+										</div>
+
+										<div class="card-body pt-0">
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table">
+												<thead>
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th style="text-align: center;">名称</th>
+														<th style="text-align: center;">描述</th>
+														<th style="text-align: center;">规定时间</th>
+														<th style="text-align: center;"></th>
+													</tr>
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+													<tr v-for="inspect in inspects" v-if="inspect.end_date.length == 0 && inspect.people == name">
+														<td style="text-align: center;">
+															<span>{{inspect.title}}</span>
+														</td>
+														
+														<td  style="text-align: center;">
+															<span>{{inspect.description}}</span>
+														</td>
+                                                        <td  style="text-align: center;">
+															<span>{{inspect.start}}</span>
+														</td>
+														<td style="text-align: center;">
+															<a :href="'http://182.92.232.96:9000/inspect/' + inspect.title + '.docx'" class="btn btn-primary btn-sm">下载</a>
+															<button @click="submitInspect(inspect.title)" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer2">提交</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+
+
+
+									<div class="card card-flush mb-5">
+										<div class="card-header card-header-stretch">
+											<div class="card-title d-flex align-items-center">
+												<span class="svg-icon svg-icon-1 svg-icon-primary me-3 lh-0">
+													<i class="bi bi-calendar-week" style="font-size: 1.5rem;"></i>
+												</span>
+												<h3 class="fw-bold m-0 text-gray-800">待处理报警</h3>
+											</div>
+										</div>
+
+										<div class="card-body pt-0">
+											<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_views_table2">
+												<thead>
+													<tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+														<th style="text-align: center;">名称</th>
+                                                        <th style="text-align: center;">监控名称</th>
+														<th style="text-align: center;">报警时间</th>
+														<th style="text-align: center;"></th>
+													</tr>
+												</thead>
+												<tbody class="fw-semibold text-gray-600">
+													<tr v-for="alert in alerts" v-if="alert.submit_date.length == 0 && alert.responsible_name == name">
+														<td style="text-align: center;">
+															<span>{{alert.name}}</span>
+														</td>
+														
+														<td  style="text-align: center;">
+															<span>{{alert.monitor_name}}</span>
+														</td>
+                                                        <td  style="text-align: center;">
+															<span>{{alert.start_data|formatDate('yyyy-M-d')}}</span>
+														</td>
+														<td style="text-align: center;">
+															<button @click="submitAlert(alert.id)" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer">提交</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+
+
+
+                                
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+                                    <!-- ------------------------------------------------------------------------------------------- -->
+								</div>
+							</div>
+						</div>
+
+						<home_footer></home_footer>
+
+					</div>
+				</div>
+
+			</div>
+
+
+            <div class="modal fade" id="kt_modal_add_customer2" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">巡检报告</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">问题情况</label>
+										<input v-model="inspect_problem" type="text" class="form-control form-control-solid" />
+									</div>
+                                    <div class="mb-1 fv-row" @click="controllerFile2()">
+                                        <label class="form-label">文件</label>
+                                        <div class="fv-row mb-2">
+                                            <div class="dropzone" id="kt_ecommerce_add_product_media">
+                                                <div class="dz-message needsclick">
+                                                    <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                    <div class="ms-4">
+                                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">选择文件</h3>
+                                                        <span class="fs-7 fw-semibold text-gray-400">{{fileName2}}</span>
+                                                    </div>
+                                                    <input type="file" style="opacity:0;" ref="fileInput2" @change="editStyle2()"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="submitInspect2()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+            <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered mw-650px">
+					<div class="modal-content">
+						<form class="form" action="#" id="kt_modal_add_customer_form" data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+							<div class="modal-header" id="kt_modal_add_customer_header">
+								<h2 class="fw-bold">报警工单</h2>
+								<div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal"><span class="svg-icon svg-icon-1">	<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">		<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />		<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />	</svg></span></div>
+							</div>
+							<div class="modal-body py-10 px-lg-17">
+								<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+									<div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">事故简述</label>
+										<input v-model="alert_problem" type="text" class="form-control form-control-solid" />
+									</div>
+                                    <div class="mb-1 fv-row" @click="controllerFile()">
+                                        <label class="form-label">文件</label>
+                                        <div class="fv-row mb-2">
+                                            <div class="dropzone" id="kt_ecommerce_add_product_media">
+                                                <div class="dz-message needsclick">
+                                                    <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                                    <div class="ms-4">
+                                                        <h3 class="fs-5 fw-bold text-gray-900 mb-1">选择文件</h3>
+                                                        <span class="fs-7 fw-semibold text-gray-400">{{fileName}}</span>
+                                                    </div>
+                                                    <input type="file" style="opacity:0;" ref="fileInput" @change="editStyle()"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<!-- <div class="fv-row mb-7">
+										<label class="required fs-6 fw-semibold mb-2">服务器地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.server_address"/>
+									</div>
+									<div class="fv-row mb-7">
+										<label class="fs-6 fw-semibold mb-2">Rule文件地址</label>
+										<input type="text" class="form-control form-control-solid" v-model="newMonitor.file_address"/>
+									</div> -->
+									
+								</div>
+							</div>
+							<div class="modal-footer flex-center">
+								<button type="button" class="btn btn-light me-3" data-bs-dismiss="modal">取消</button>
+								<button @click="submitAlert2()" type="button" class="btn btn-primary me-3" data-bs-dismiss="modal">提交</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+>
+
+		</div>
+	</body>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
+	<script src="/assets/js/scripts.bundle.js"></script>
+	<script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+	<script src="https://unpkg.com/http-vue-loader@1.4.2/src/httpVueLoader.js"></script>
+
+	<!-- <script src="/ownJS/task.js"></script> -->
+	<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+
+
+	<script>
+		
+    
+        
+        
+		new Vue({
+        	el: "#vue_body",
+			components: {
+                "home_sidebar": httpVueLoader("/plug_in/home_sidebar.vue"),
+				"home_footer": httpVueLoader("/plug_in/home_footer.vue"),
+				"home_header": httpVueLoader("/plug_in/home_header.vue"),
+                
+            },
+        	data: {
+                fileName: "文件名",
+                fileName2: "文件名",
+				name: localStorage.getItem("nameForUser"),
+				inspects: [{
+					title: "",
+					description: "",
+					people: "",
+					start: "",
+					end_date: "",
+					problem: "",
+				}],
+				inspect_name: "",
+				inspect_problem: "",
+				alerts: [{
+					id: "",
+					name: "",
+					responsible_name: "",
+					start_data: "",
+					monitor_name: "",
+					submit_date: "",
+					submit_note: ""
+				}],
+				alert_id: "",
+				alert_problem: "",
+            },
+			methods: {
+				controllerFile() {
+                    this.$refs.fileInput.click();
+                },
+
+				controllerFile2() {
+                    this.$refs.fileInput2.click();
+                },
+
+                editStyle() {
+                    this.fileName = this.$refs.fileInput.files[0].name;
+                },
+
+				editStyle2() {
+                    this.fileName2 = this.$refs.fileInput2.files[0].name;
+                },
+
+				// 获取自己的巡检任务（前端过滤）
+				getInspect() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/inspect/getInspect",
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.inspects = resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 给inspect_name赋值
+				submitInspect(title) {
+					this.inspect_name = title;
+				},
+
+				// 提交巡检结果
+				uploadFile2(file) {
+  					const xhr = new XMLHttpRequest();
+  					xhr.open('PUT', 'http://182.92.232.96:9000/secondinspect/' + this.inspect_name + '.docx', true);
+  					xhr.setRequestHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  					xhr.setRequestHeader('x-amz-acl', 'public-read'); // 可选，如果需要对上传的文件设置访问权限
+  					xhr.onload = function() {
+  					  if (xhr.status === 200) {
+  					    console.log('文件上传成功');
+  					  } else {
+  					    console.error('文件上传失败', xhr.responseText);
+  					  }
+  					};
+  					xhr.send(file);
+				},
+
+				// 提交巡检结果
+				submitInspect2() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/inspect/submitInspect",
+						data: JSON.stringify({"title": this.inspect_name, "problem": this.inspect_problem}), 
+            		})
+					.then(resp => {
+						this.uploadFile2(this.$refs.fileInput2.files[0])
+						setTimeout(function (){
+							// 刷新页面
+							location.reload();
+						}, 4000);
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 获得自己负责的报警
+				getAlert() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/alert/getAlert",
+            		})
+					.then(resp => {
+						console.log(resp.data.data);
+						this.alerts = resp.data.data;
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				},
+
+				// 给alert_name赋值
+				submitAlert(id) {
+					this.alert_id = id;
+				},
+
+				// 提交报警结果
+				uploadFile(file) {
+  					const xhr = new XMLHttpRequest();
+  					xhr.open('PUT', 'http://182.92.232.96:9000/alert/' + this.alert_id + '.docx', true);
+  					xhr.setRequestHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  					xhr.setRequestHeader('x-amz-acl', 'public-read'); // 可选，如果需要对上传的文件设置访问权限
+  					xhr.onload = function() {
+  					  if (xhr.status === 200) {
+  					    console.log('文件上传成功');
+  					  } else {
+  					    console.error('文件上传失败', xhr.responseText);
+  					  }
+  					};
+  					xhr.send(file);
+				},
+
+				// 提交报警结果
+				submitAlert2() {
+					axios({
+                		method: "post",
+                		headers: {
+							"Content-Type": "application/json;charset=UTF-8"
+                		},
+						withCredentials: true,
+                		url: "http://127.0.0.1:8088/alert/submitAlert",
+						data: JSON.stringify({"id": this.alert_id, "submit_note": this.alert_problem}),
+            		})
+					.then(resp => {
+						this.uploadFile(this.$refs.fileInput.files[0])
+						setTimeout(function (){
+							// 刷新页面
+							location.reload();
+						}, 4000);
+                	})
+                	.catch(err => {
+                    	console.log(err);
+                	})
+				}
+
+
+            },
+
+            mounted() {
+				this.getInspect();
+				this.getAlert();
+            },
+
+			filters:{
+				formatDate: function(value,args) {
+					var dt = new Date(value);
+					if(args == 'yyyy-M-d') {// yyyy-M-d
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						return `${year}-${month}-${date}`;
+					} else if(args == 'yyyy-M-d H:m:s'){// yyyy-M-d H:m:s
+						let year = dt.getFullYear();
+						let month = dt.getMonth() + 1;
+						let date = dt.getDate();
+						let hour = dt.getHours();
+						let minute = dt.getMinutes();
+						let second = dt.getSeconds();
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					} else if(args == 'yyyy-MM-dd') {// yyyy-MM-dd
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						return `${year}-${month}-${date}`;
+					} else {// yyyy-MM-dd HH:mm:ss
+						let year = dt.getFullYear();
+						let month = (dt.getMonth() + 1).toString().padStart(2,'0');
+						let date = dt.getDate().toString().padStart(2,'0');
+						let hour = dt.getHours().toString().padStart(2,'0');
+						let minute = dt.getMinutes().toString().padStart(2,'0');
+						let second = dt.getSeconds().toString().padStart(2,'0');
+						return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+					}
+        		}
+			},
+			
+			
+
+   		})
+
+       
+	</script>
+</html>
+
+
+
+
