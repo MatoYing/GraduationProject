@@ -52,7 +52,7 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
    @Override
    public void sendCode(int code, String phone) {
       // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html
-      com.aliyun.dysmsapi20170525.Client client = createClient("LTAI5tKZsifWdfjamh26QUxU", "y9O1zLm5jatYrmr6IKPq7f5CDBbj2S");
+      com.aliyun.dysmsapi20170525.Client client = createClient("LTAIdsadsafdh26QUxU", "y9O1zLm5jafdsjiicz5CDBbj2S");
       com.aliyun.dysmsapi20170525.models.SendSmsRequest sendSmsRequest = new com.aliyun.dysmsapi20170525.models.SendSmsRequest()
               .setSignName("基础平台动态监管系统")
               .setTemplateCode("SMS_275295435")
@@ -100,9 +100,9 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
       }
       GetUserTokenRequest getUserTokenRequest = new GetUserTokenRequest()
               //应用基础信息-应用信息的AppKey,请务必替换为开发的应用AppKey
-              .setClientId("ding91tq9woqjqwy8d3i")
+              .setClientId("ding9dsq9woqwefdsd3i")
               //应用基础信息-应用信息的AppSecret，,请务必替换为开发的应用AppSecret
-              .setClientSecret("1OmLKrsSL3etSlq3EFssMDJ0PAvUojiBLRggi-0PI5kMYM3E4YIt7DjK6M4AgLHW")
+              .setClientSecret("1OmsdKrdsL34tSdsdssMDJ0PAvUojsdsfci-0PI5kvsdfeDjK6M4fdsW")
               .setCode(authCode)
               .setGrantType("authorization_code");
       GetUserTokenResponse getUserTokenResponse = null;
@@ -133,8 +133,8 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
    }
 
    //////////////////////////////////钉钉机器人通知////////////////////////////////////////
-   private static final String SECRET = "SEC48d4fcf281e41b9b74fde0a2a1a0c8df63aac76be9f29c35d4fc40b5a42540b8";
-   private static final String URL = "https://oapi.dingtalk.com/robot/send?access_token=5c3521c6b5834225943fc9605136f2ccddf44e93197c628a5f8263749c1d8a5f";
+   private static final String SECRET = "SEC48dfdsfdsfds74fde0a2a1afdsfdsac76befdsfsdfdsb5a42540b8";
+   private static final String URL = "https://oapi.dingtalk.com/robot/send?access_token=5c3521c6bdfsfdsf605136f2ccddf44e9fdsfdsfdsfdsf749c1d8a5f";
    @Override
    public void sendMessageByDingDing(String message, String phone) {
       Long timestamp = System.currentTimeMillis();
@@ -203,7 +203,7 @@ public class ThirdPartyServiceImpl implements ThirdPartyService {
       // 此处填写，写信人的账号(改邮箱账号)
       props.put("mail.user", "1350478903@qq.com");
       // 此处填写16位STMP口令（改16位）
-      props.put("mail.password", "asyjclilothufihg");
+      props.put("mail.password", "adsyj323fdsthgfdhg");
       // 构建授权信息，用于进行SMTP进行身份验证
       Authenticator authenticator = new Authenticator() {
          protected PasswordAuthentication getPasswordAuthentication() {

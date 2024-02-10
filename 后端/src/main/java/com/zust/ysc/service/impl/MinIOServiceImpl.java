@@ -25,7 +25,7 @@ public class MinIOServiceImpl implements IMinIOService {
    static {
       minioClient = MinioClient.builder()
               .endpoint("http://182.92.232.96:9000")
-              .credentials("nR6EOvrx6VKIgACC", "mQFcbCURvhV0D7kaSvbVOvQW9EbicmZn")
+              .credentials("nR6EOfdsfdsgACC", "mQFfds256Dfsd4bVcvfdewbdsmZn")
               .build();
    }
 
