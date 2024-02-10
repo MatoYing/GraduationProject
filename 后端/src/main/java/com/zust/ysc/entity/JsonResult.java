@@ -5,7 +5,7 @@ import lombok.Setter;
 
 /**
  * @Description 统一后端返回JSON格式(形如：{"code":"0","data":{"id":1,"password":"123456","username":"倪升武"},"msg":"操作成功！"})
- * @Author 闫思潮
+ * @Author Github: MatoYing
  * @Date 27/02/2023 6:48 pm
  */
 

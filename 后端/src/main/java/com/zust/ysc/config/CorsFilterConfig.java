@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @Description 利用Cors原理，实现跨域
- * @Author 闫思潮
+ * @Author Github: MatoYing
  * @Date 01/03/2023 3:40 pm
  */
 

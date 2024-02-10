@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Description 将利用Jackson返回的JSON的null值转换为空字符串(xxx: null -> xxx: "")
  *              为什么？前后台传值，null会变成"null"，这是由于JSON的原理，只能变成字符串或数字的形式。
  *              具体批注不去理解了，太高级了(批注来时chatGPT)
- * @Author 闫思潮
+ * @Author Github: MatoYing
  * @Date 27/02/2023 4:00 pm
  */
 
