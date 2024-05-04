@@ -65,7 +65,9 @@ Logstash是一款用于数据收集、分析和处理的开源工具。这里Log
 以上提到的技术是现代日志采集、处理、存储、搜索和可视化的主要工具，它们相互协作，实现了对大量日志数据的高效管理和分析，帮助用户更快地理解分布式环境的运行状况，提高分布式系统的可用性和稳定性。
 
 ### 功能说明
-1. 登录注册功能<br>在登录功能上不仅仅使用传统的账号密码登录，还接入了QQ 和钉钉来实现第三方登录。不仅如此，也利用Vue 的局部刷新和双向绑定实现很好的交互，当账号或者密码错误时，会有提示字符出现。并且还使用了reCAPTCHA 进行人类识别，比起传统验证码的方式，可以为用户提供更好的体验效果。<br><img width="634" alt="image" src="https://github.com/MatoYing/GraduationProject/assets/57103853/849ebfa8-e2ae-4f37-89ad-9a63af183f69">
+<img width="642" alt="image" src="https://github.com/MatoYing/GraduationProject/assets/57103853/3dfdd0be-5f8d-4bb6-98f3-c1daff2aa4df">
+
+1. 登录注册功能<br>在登录功能上不仅仅使用传统的账号密码登录，还接入了QQ 和钉钉来实现第三方登录。不仅如此，也利用Vue 的局部刷新和双向绑定实现很好的交互，当账号或者密码错误时，会有提示字符出现。并且还使用了reCAPTCHA 进行人类识别，比起传统验证码的方式，可以为用户提供更好的体验效果。如果忘记密码可以跳到忘记密码页面，通过阿里云接入的手机号短信验证的方式来进行重制密码。<br><img width="634" alt="image" src="https://github.com/MatoYing/GraduationProject/assets/57103853/849ebfa8-e2ae-4f37-89ad-9a63af183f69">
 
 2. 首页数据展示功能<br>这是用户登录后会首先跳到的页面，展示了已完成巡检数、普通告警数等内容，为运维人员提供宏观的数据展示。<br><img width="634" alt="image" src="https://github.com/MatoYing/GraduationProject/assets/57103853/89c22cbb-8cba-42d5-a762-a6b1c407b640">
 
